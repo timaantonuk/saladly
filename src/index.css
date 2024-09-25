@@ -60,6 +60,11 @@ button {
     cursor: pointer;
 }
 
+input, input:focus, input:active {
+    border: none;
+    outline: none;
+}
+
 @media (prefers-reduced-motion: reduce){
     html:focus-within {
         scroll-behavior: auto;

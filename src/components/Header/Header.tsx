@@ -12,20 +12,22 @@ function Header() {
                                                           alt="Saladly logo"/></a>
                 <div className='header__text-content'>
                     <a className='header__title-link'><h1 className='header__title'>Saladly</h1></a>
-                    <h2 className='header__subtitle'>The Tastiest and Largest Salads on Earth!</h2>
+                    {/*<h2 className='header__subtitle'>The Tastiest and Largest Salads on Earth!</h2>*/}
                 </div>
             </div>
 
             {/*// TODO SEARCH BAR AT HEADER CENTER*/}
 
+            <input className='header__search-input' type="text" placeholder='🔍  Search for a salad...'/>
+
             <div className='header__buttons'>
                 <button className='header__login-button' type='button'> <span className='header__login-text'>Account |</span> <IoPersonCircleSharp
-                    style={{width: '40px', height: '40px'}}/></button>
+                    style={{width: '30px', height: '30px'}}/></button>
                 <button className='header__cart-button' type='button'><span className='header__cart-text'>100$ |</span>
-                    <IoCartSharp style={{width: '40px', height: '40px'}}/></button>
+                    <IoCartSharp style={{width: '30px', height: '30px'}}/></button>
             </div>
 
-            <h3 className='header__subtitle-hidden'>The Tastiest and Largest Salads <br/> on Earth! Order now.</h3>
+            {/*<h3 className='header__subtitle-hidden'>The Tastiest and Largest Salads <br/> on Earth! Order now.</h3>*/}
 
         </header>
     );

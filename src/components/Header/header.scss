@@ -26,12 +26,12 @@
 
   &__logo {
     &-img {
-      max-width: 10rem;
-      max-height: 10rem;
+      max-width: 6rem;
+      max-height: 6rem;
 
       @include mobile {
-        max-width: 6rem;
-        max-height: 6rem;
+        max-width: 4.5rem;
+        max-height: 4.5rem;
       }
 
     }
@@ -61,12 +61,11 @@
 
     @include mobile {
       gap: .5rem;
-      margin-bottom: 1rem;
     }
   }
 
   &__login-text {
-    font-size: 1.5rem;
+    font-size: 1rem;
   }
 
   &__login-button {
@@ -84,7 +83,7 @@
   }
 
   &__cart-text {
-    font-size: 1.5rem;
+    font-size: 1rem;
   }
 
 
@@ -92,6 +91,7 @@
   &__subtitle {
     color: $text-color-secondary;
     font-family: "Proxima Nova Light", sans-serif;
+    font-size: 1.2rem;
     @include mobile {
       font-size: 1rem;
       display: none;
@@ -106,6 +106,24 @@
       font-family: "Proxima Nova Light", sans-serif;
       display: block;
       text-align: center;
+    }
+  }
+
+  &__search-input, &__search-input:focus {
+    padding-block: .8rem;
+    padding-inline: 1.2rem;
+    border-radius: 3rem;
+    border: 2px solid $text-color-secondary;
+    width: 100%;
+    max-width: 450px;
+  }
+
+  &__search-input {
+    display: block;
+    position: relative;
+
+    @include mobile {
+      margin-bottom: .5rem;
     }
   }
 }
