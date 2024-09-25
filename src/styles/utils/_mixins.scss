@@ -1,0 +1,41 @@
+@import 'variables';
+
+@mixin container {
+  max-width: 1280px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-inline: 40px;
+  padding-block: 25px;
+  background-color: $container-color;
+  border-radius: .5rem;
+
+  @media screen and (max-width: 768px) {
+    width: 90%;
+    padding-inline: 10px;
+    padding-block: 25px;
+  }
+}
+
+@mixin title {
+  font-family: "Proxima Nova Bold", sans-serif;
+  color: $text-color;
+  font-size: 3rem;
+
+  @media screen and (max-width: 768px) {
+    font-size: 2.5rem;
+  }
+}
+
+@mixin button {
+  border-radius: 3rem;
+  background-color: $accent-color-1;
+  color: $text-color-light;
+  padding-block: .8rem;
+  padding-inline: 1.2rem;
+}
+
+@mixin mobile {
+  @media screen and (max-width: 768px) {
+    @content
+  }
+}
