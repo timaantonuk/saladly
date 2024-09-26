@@ -1,0 +1,53 @@
+@import '../../styles/utils/mixins';
+@import '../../styles/utils/variables';
+
+.filter-menu {
+  @include container;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  @include tablet {
+    flex-direction: column;
+    gap: 1.5rem;
+    padding-top: 0;
+  }
+
+  &__list {
+    display: flex;
+    gap: 1.5rem;
+    max-width: 100%;
+
+    @include tablet {
+      overflow-x: scroll;
+    }
+
+    @include mobile {
+      overflow-x: scroll;
+      gap: .6rem
+    }
+  }
+
+  &__item {
+    white-space: nowrap;
+    font-size: $fz-normal;
+    padding-block: .8rem;
+    padding-inline: 1.2rem;
+    &--selected {
+      @include button;
+      background-color: $accent-color-1;
+    }
+  }
+}
+
+.sorting-button {
+  font-size: $fz-normal;
+
+  &__sort-type {
+    font-family: "Proxima Nova Bold";
+    color: $accent-color-3;
+    text-decoration: underline;
+  }
+}
