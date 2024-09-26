@@ -1,0 +1,81 @@
+@import '../../styles/utils/mixins';
+@import '../../styles/utils/variables';
+
+.salad-card {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  background-color: $color-white;
+  padding-block: 2rem;
+  padding-inline: 1rem;
+  border-radius: 1rem;
+
+
+  &__heading {
+    font-size: 1.7rem;
+    font-family: "Proxima Nova Bold", sans-serif;
+    text-align: center;
+    color: $text-color;
+    margin-bottom: 1rem;
+  }
+  
+  &__description {
+    font-family: "Proxima Nova Light", sans-serif;
+    text-align: center;
+    color: $text-color-secondary;
+  }
+  
+  &__kcal-info {
+    font-family: "Proxima Nova Bold", sans-serif;
+    text-align: center;
+    color: $text-color-secondary;
+    margin-bottom: .2rem;
+  }
+
+  &__pcf-info {
+    font-family: "Proxima Nova Light", sans-serif;
+    text-align: center;
+    color: $text-color-secondary;
+    font-size: 0.8rem;
+  }
+
+  &__buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    padding-block: .8rem;
+    padding-inline: .8rem;
+    background-color: $container-color;
+    border-radius: 1.2rem;
+  }
+  
+  &__button {
+    @include select-button;
+
+    @include mobile {
+      font-size: 1rem;
+    }
+  }
+
+  &__price-info {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+  }
+
+  &__price {
+    font-size: 1.7rem;
+    font-family: "Proxima Nova Bold", sans-serif;
+    color: $accent-color-1;
+  }
+
+  &__price-button {
+    @include button;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+  }
+}

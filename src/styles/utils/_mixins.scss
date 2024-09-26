@@ -11,8 +11,8 @@
   border-radius: .5rem;
 
   @media screen and (max-width: 768px) {
-    width: 90%;
-    padding-inline: 10px;
+    width: 95%;
+    padding-inline: 20px;
     padding-block: 25px;
   }
 }
@@ -40,6 +40,19 @@
   }
 }
 
+@mixin select-button {
+  border-radius: .7rem;
+  font-size: $fz-normal;
+  background-color: $bg-color;
+  padding-block: .7rem;
+  padding-inline: 1.5rem;
+  transition: all, 0.3s;
+  &:hover, &:active {
+    scale: 1.08;
+    background-color: $accent-light;
+  }
+}
+
 @mixin mobile {
   @media screen and (max-width: 768px) {
     @content
@@ -47,7 +60,14 @@
 }
 
 @mixin tablet {
-  @media screen and (max-width: 1080px) {
+  @media screen and (max-width: 1150px) {
     @content
+  }
+}
+
+@mixin hover {
+  transition: all, 0.3s;
+  &:hover {
+    scale: 1.08;
   }
 }

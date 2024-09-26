@@ -3,8 +3,8 @@
 
 .filter-menu {
   @include container;
-  border-top-left-radius: 0;
-  border-top-right-radius: 0;
+  position: relative;
+  border-radius: 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -35,6 +35,10 @@
     font-size: $fz-normal;
     padding-block: .8rem;
     padding-inline: 1.2rem;
+    cursor: pointer;
+
+    @include hover;
+
     &--selected {
       @include button;
       background-color: $accent-color-1;
@@ -46,8 +50,39 @@
   font-size: $fz-normal;
 
   &__sort-type {
-    font-family: "Proxima Nova Bold";
+    font-family: "Proxima Nova Bold", sans-serif;
     color: $accent-color-3;
     text-decoration: underline;
+  }
+
+  &::after {
+    display: none;
+    @include mobile {
+      display: block;
+    }
+    bottom: 80%;
+    right: 5%;
+    position: absolute;
+    content: '→';
+    font-size: 30px;
+    padding: 10px;
+    color: $accent-color-1;
+    animation-name: scroll;
+    animation-duration: 4s;
+    animation-iteration-count: infinite;
+  }
+}
+
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+
+  50% {
+    transform: translateX(20px);
+  }
+
+  100% {
+    transform: translateX(0);
   }
 }

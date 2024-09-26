@@ -10,8 +10,12 @@
   align-items: center;
   margin-top: 3rem;
   position: sticky;
+  z-index: 1;
+  top: 0;
+  left: 0;
 
   @include tablet {
+    position: static;
     flex-direction: column;
     gap: 1rem;
     margin-top: 1rem;

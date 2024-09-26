@@ -1,7 +1,35 @@
 @import './utils/variables';
+@import './utils/mixins';
 
 body {
   background-color: $bg-color;
   font-family: "Proxima Nova Regular", sans-serif;
   font-size: 1rem;
+  position: relative;
+
+
+  &::after {
+    position: fixed;
+    cursor: pointer;
+    bottom: 5%;
+    right: 20px;
+    content: '↑';
+    font-size: 60px;
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background-color: $accent-color-1;
+    color: $text-color-light;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    @include mobile {
+      font-size: 30px;
+      width: 40px;
+      height: 40px;
+      bottom: 2%;
+      right: 5%;
+    }
+  }
 }
