@@ -1,0 +1,54 @@
+@import '../../styles/utils/mixins';
+@import '../../styles/utils/variables';
+
+.pagination {
+  @include container;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+
+  &__list {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    gap: 3rem;
+
+    @include mobile {
+      gap: 1rem
+    }
+
+  }
+
+  &__item {
+
+    &:nth-child(2) {
+      padding-inline: 1.7rem;
+
+      @include mobile {
+        font-size: 1rem;
+        padding-block: .8rem;
+        padding-inline: 1.2rem;
+      }
+    }
+
+    font-size: 1.5rem;
+    color: $accent-color-1;
+    padding-block: 1rem;
+    padding-inline: 1.5rem;
+    border-radius: 50%;
+    background-color: transparent;
+    border: 2px solid $accent-color-1;
+    cursor: pointer;
+    transition: all, .3s;
+
+    &:hover {
+      background-color: $accent-color-1;
+      color: $text-color-light
+    }
+
+    @include mobile {
+      font-size: 1rem;
+      padding-block: .8rem;
+      padding-inline: 1.1rem;
+    }
+  }
+}

@@ -8,7 +8,7 @@ function SaladCard() {
       <div className="salad-card__info">
         <img
           src="https://salateira.ua/wp-content/uploads/2020/02/caesar.png"
-          alt="??"
+          alt="Caesar salad"
           className="salad-card__image"
         />
         <h3 className="salad-card__heading">Salad Name</h3>
