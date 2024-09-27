@@ -1,22 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './header.scss';
 import logo from '../../assets/logo.png';
-import {
-  IoCartSharp,
-  IoClose,
-  IoMenu,
-  IoPersonCircleSharp,
-} from 'react-icons/io5';
+import { IoCartSharp, IoClose, IoPersonCircleSharp } from 'react-icons/io5';
 import { RxDividerVertical } from 'react-icons/rx';
-import MobileMenuModal from '../MobileMenuModal/MobileMenuModal.tsx';
 
-function Header() {
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-
-  function handleMobileMenuOpen() {
-    setIsMobileMenuOpen((prevMenuOpen) => !prevMenuOpen);
-  }
-
+function Header({ handleMobileModalOpen, isOpen }) {
   return (
     <>
       <header className="header">
@@ -31,14 +19,25 @@ function Header() {
           </div>
 
           <button
-            onClick={handleMobileMenuOpen}
+            onClick={handleMobileModalOpen}
             className="header__mobile-menu"
           >
-            {isMobileMenuOpen ? (
-              <IoClose className="header__mobile-burger" />
-            ) : (
-              <IoMenu className="header__mobile-burger" />
-            )}
+            <div className="header__mobile-burger">
+              <div
+                className={
+                  isOpen
+                    ? 'header__arrow header__arrow--rotate-right'
+                    : 'header__arrow'
+                }
+              ></div>
+              <div
+                className={
+                  isOpen
+                    ? 'header__arrow header__arrow--rotate-left'
+                    : 'header__arrow'
+                }
+              ></div>
+            </div>
           </button>
         </div>
 
@@ -62,7 +61,6 @@ function Header() {
           </button>
         </div>
       </header>
-      {isMobileMenuOpen && <MobileMenuModal />}
     </>
   );
 }

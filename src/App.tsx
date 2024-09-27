@@ -4,13 +4,23 @@ import FiltersAndSorting from './components/FiltersAndSorting/FiltersAndSorting.
 import AllSalads from './components/AllSalads/AllSalads.tsx';
 import Pagination from './components/Pagination/Pagination.tsx';
 import MobileMenuModal from './components/MobileMenuModal/MobileMenuModal.tsx';
-import MobileModalWrapper from './components/MobileModalWrapper/MobileModalWrapper.tsx';
+import { useState } from 'react';
 
 function App() {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  function handleMobileModalOpen() {
+    setIsMobileMenuOpen((prevState) => !prevState);
+  }
+
   return (
     <>
-      <MobileModalWrapper />
-      <Header />
+      <MobileMenuModal isOpen={isMobileMenuOpen} />
+      {/*<MobileModalWrapper />*/}
+      <Header
+        handleMobileModalOpen={handleMobileModalOpen}
+        isOpen={isMobileMenuOpen}
+      />
       <FiltersAndSorting />
       <AllSalads />
       <Pagination />

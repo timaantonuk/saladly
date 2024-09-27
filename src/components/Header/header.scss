@@ -47,7 +47,10 @@
     display: none;
 
     @include tablet {
-      display: block;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
       position: relative;
       z-index: 100;
       width: 40px;
@@ -56,7 +59,28 @@
     }
   }
 
-  &__logo {
+  &__arrow {
+
+    &:nth-child(1) {
+      margin-bottom: 10px;
+
+    }
+
+    transition: all .8s ease-in-out;
+    width: 30px;
+    height: 3px;
+    background-color: $text-color;
+
+    &--rotate-right {
+      transform: translateY(5px) rotate(45deg);
+    }
+
+    &--rotate-left {
+      transform: translateY(-8px) rotate(-45deg);
+    }
+
+  }
+    &__logo {
     &-img {
       max-width: 6rem;
       max-height: 6rem;
