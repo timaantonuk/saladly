@@ -1,0 +1,111 @@
+@import '../../styles/utils/_variables.scss';
+@import '../../styles/utils/_mixins.scss';
+
+.cart-item {
+  color: $text-color-light;
+  background-color: $accent-light;
+  display: flex;
+  padding-block: 1rem;
+  align-items: center;
+  gap: 2rem;
+  border-radius: 2rem;
+
+  @include mobile {
+    flex-direction: column;
+    gap: 1rem;
+    padding-bottom: 3rem;
+  }
+  
+  &__image {
+    width: 8rem;
+    aspect-ratio: 1;
+
+    @include mobile {
+      width: 12rem;
+    }
+  }
+
+  &__info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: .5rem;
+
+    @include  mobile {
+      align-items: center;
+
+    }
+
+
+    &__heading {
+      @include semi-heading;
+      color: $text-color-light;
+      margin-bottom: 0;
+
+      @include mobile {
+        font-size: 2rem;
+      }
+
+
+    }
+
+    &__size {
+      font-size: $fz-normal;
+    }
+
+    &__controls {
+
+      color: $text-color-light;
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+      font-size: $fz-normal;
+
+      @include mobile {
+        gap: 1.2rem;
+
+      }
+
+      &__button{
+       @include transparent-btn;
+
+      @include mobile {
+        padding-block: .8rem;
+        padding-inline: 1.15rem;
+      }
+
+        &:hover {
+          background-color: $accent-color-1;
+          color: $text-color-light
+        }
+      }
+
+      &__button--minus {
+        padding-inline: .75rem;
+
+        @include mobile {
+          padding-inline: 1.3rem;
+        }
+      }
+    }
+  }
+
+  &__prices {
+    &__price {
+      font-size: $fz-normal;
+      font-family: "Proxima Nova Bold", sans-serif;
+      &__span {
+        color: $accent-color-3;
+      }
+    }
+  }
+
+  &__close-btn {
+    @include transparent-btn;
+    padding: 1rem;
+
+    @include mobile {
+      display: none;
+    }
+  }
+}

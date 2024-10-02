@@ -1,0 +1,124 @@
+@import '../../styles/utils/_variables.scss';
+@import '../../styles/utils/_mixins.scss';
+
+.cart {
+  @include container;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+
+  &__title {
+    @include title;
+  }
+
+  &__wrapper {
+    //min-height: 100vh;
+    padding-block: 3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 3rem;
+
+    @include mobile {
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: flex-start;
+      gap: 4rem;
+      padding-block: 2rem;
+    }
+  }
+
+  &__items-container {
+    display: flex;
+    width: 60%;
+    flex-direction: column;
+    gap: 1rem;
+
+    @include mobile {
+      order: 0;
+      width: 100%;
+    }
+  }
+
+  &__recipt {
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    padding-inline: 1rem;
+    gap: 1rem;
+
+    @include mobile {
+      width: 100%;
+    }
+
+    .cart__recipt {
+      background-color: $text-color-light;
+      padding: 20px;
+      border-radius: 8px;
+      font-family: "Proxima Nova", sans-serif;
+
+      &__header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 18px;
+        font-weight: bold;
+        padding-bottom: 10px;
+
+      }
+
+      &__body {
+        display: grid;
+        grid-template-columns: 1fr auto auto;
+        gap: 10px 20px;
+        margin: 10px 0;
+
+        &__item {
+          padding: 5px 0;
+          display: contents;
+
+          &-name {
+            grid-column: 1 / 2;
+          }
+
+          &-qty {
+            grid-column: 2 / 3;
+            text-align: right;
+          }
+
+          &-price {
+            grid-column: 3 / 4;
+            text-align: right;
+          }
+        }
+      }
+
+      &__footer {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        font-weight: bold;
+        padding-top: 10px;
+        border-top: 1px dotted $text-color;
+
+        &-label {
+          grid-column: 1 / 2;
+        }
+
+        &-total {
+          grid-column: 2 / 3;
+          text-align: right;
+        }
+      }
+
+      &__button {
+        @include button;
+        text-align: center;
+      }
+    }
+    .cart__recipt__header__decorative {
+      height: 1px;
+      width: 30%;
+      background: black;
+    }
+  }
+}

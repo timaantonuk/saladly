@@ -5,6 +5,7 @@ import AllSalads from './components/AllSalads/AllSalads.tsx';
 import Pagination from './components/Pagination/Pagination.tsx';
 import MobileMenuModal from './components/MobileMenuModal/MobileMenuModal.tsx';
 import { useState } from 'react';
+import Cart from './components/Cart/Cart.tsx';
 
 function App() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -24,6 +25,7 @@ function App() {
       <FiltersAndSorting />
       <AllSalads />
       <Pagination />
+      <Cart />
     </>
   );
 }

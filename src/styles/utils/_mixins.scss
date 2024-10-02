@@ -27,6 +27,13 @@
   }
 }
 
+@mixin semi-heading {
+  font-size: 1.7rem;
+  font-family: "Proxima Nova Bold", sans-serif;
+  color: $text-color;
+  margin-bottom: 1rem;
+}
+
 @mixin button {
   border-radius: 3rem;
   background-color: $accent-color-1;
@@ -70,4 +77,15 @@
   &:hover {
     scale: 1.08;
   }
+}
+
+@mixin transparent-btn {
+  color: $text-color-light;
+  padding-block: .3rem;
+  padding-inline: .7rem;
+  border-radius: 50%;
+  background-color: transparent;
+  border: 2px solid $text-color-light;
+  cursor: pointer;
+  transition: all, .3s;
 }

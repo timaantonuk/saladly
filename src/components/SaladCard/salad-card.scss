@@ -12,11 +12,8 @@
 
 
   &__heading {
-    font-size: 1.7rem;
-    font-family: "Proxima Nova Bold", sans-serif;
+    @include semi-heading;
     text-align: center;
-    color: $text-color;
-    margin-bottom: 1rem;
   }
   
   &__description {
