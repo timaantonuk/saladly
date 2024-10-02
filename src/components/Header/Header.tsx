@@ -3,20 +3,22 @@ import './header.scss';
 import logo from '../../assets/logo.png';
 import { IoCartSharp, IoClose, IoPersonCircleSharp } from 'react-icons/io5';
 import { RxDividerVertical } from 'react-icons/rx';
+import { Link } from 'react-router-dom';
 
 function Header({ handleMobileModalOpen, isOpen }) {
   return (
     <>
       <header className="header">
         <div className="header__controls">
-          <a className="header__logo" href="#">
+          <Link to="/">
             <img className="header__logo-img" src={logo} alt="Saladly logo" />
-          </a>
-          <div className="header__text-content">
-            <a className="header__title-link">
+          </Link>
+
+          <Link to="/">
+            <div className="header__text-content">
               <h1 className="header__title">Saladly</h1>
-            </a>
-          </div>
+            </div>
+          </Link>
 
           <button
             onClick={handleMobileModalOpen}
@@ -54,11 +56,14 @@ function Header({ handleMobileModalOpen, isOpen }) {
             <RxDividerVertical />{' '}
             <IoPersonCircleSharp style={{ width: '30px', height: '30px' }} />
           </button>
-          <button className="header__cart-button" type="button">
-            <span className="header__cart-text">100$</span>{' '}
-            <RxDividerVertical />
-            <IoCartSharp style={{ width: '30px', height: '30px' }} />
-          </button>
+
+          <Link to="/cart">
+            <button className="header__cart-button" type="button">
+              <span className="header__cart-text">100$</span>{' '}
+              <RxDividerVertical />
+              <IoCartSharp style={{ width: '30px', height: '30px' }} />
+            </button>
+          </Link>
         </div>
       </header>
     </>
