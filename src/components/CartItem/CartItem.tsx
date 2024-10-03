@@ -13,6 +13,7 @@ function CartItem() {
       <div className="cart-item__info">
         <h4 className="cart-item__info__heading">Ceasar Salad</h4>
         <p className="cart-item__info__size">Big portion</p>
+        <p className="cart-item__info__pricing">66.99$</p>
 
         <div className="cart-item__info__controls">
           <button className="cart-item__info__controls__button cart-item__info__controls__button--minus ">

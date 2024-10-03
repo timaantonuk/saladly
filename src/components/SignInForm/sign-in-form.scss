@@ -1,7 +1,7 @@
 @import '../../styles/utils/variables';
 @import '../../styles/utils/mixins';
 
-.signup {
+.signin {
   font-family: "Proxima Nova", sans-serif;
   background-color: $bg-color;
   @include container;
@@ -94,7 +94,7 @@
       margin-bottom: $spacing-unit * 2;
     }
 
-    .signup__input {
+    .signin__input {
       width: 100%;
       padding: $spacing-unit;
       margin-bottom: $spacing-unit;
@@ -103,7 +103,7 @@
       font-size: $font-size-base;
     }
 
-    .signup__button {
+    .signin__button {
       @include button;
       width: 100%;
       font-size: $fz-normal;
@@ -125,7 +125,7 @@
       @include flex-center;
       gap: 1rem;
 
-      .signup__socials-icon {
+      .signin__socials-icon {
         padding: $button-padding;
         border-radius: 50%;
         cursor: pointer;
@@ -137,7 +137,7 @@
     }
   }
 
-  &__sign-in {
+  &__sign-up {
     text-align: center;
     color: $text-color;
     margin-bottom: 1rem;

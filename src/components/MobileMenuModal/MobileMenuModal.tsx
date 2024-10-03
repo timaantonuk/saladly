@@ -1,6 +1,6 @@
 import './mobile-menu-modal.scss';
 import { IoCartSharp, IoPersonCircleSharp } from 'react-icons/io5';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 interface IMobileMenuModalProps {
   isOpen: boolean;
@@ -27,13 +27,15 @@ function MobileMenuModal({
       }
     >
       <ul className="mobile-menu-modal__list">
-        <button
-          className="mobile-menu-modal__item"
-          onClick={handleMobileModalOpen}
-        >
-          <span className="mobile-menu-modal__span">My Account</span>
-          <IoPersonCircleSharp style={{ width: '30px', height: '30px' }} />
-        </button>
+        <Link to="/sign-in">
+          <button
+            className="mobile-menu-modal__item"
+            onClick={handleMobileModalOpen}
+          >
+            <span className="mobile-menu-modal__span">My Account</span>
+            <IoPersonCircleSharp style={{ width: '30px', height: '30px' }} />
+          </button>
+        </Link>
 
         <button className="mobile-menu-modal__item" onClick={handleGoToCart}>
           <span className="mobile-menu-modal__span">Go to Cart</span>

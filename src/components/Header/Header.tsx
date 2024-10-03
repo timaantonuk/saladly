@@ -62,7 +62,7 @@ function Header() {
         />
 
         <div className="header__buttons">
-          <Link to="/signup">
+          <Link to="/sign-in">
             <button className="header__login-button" type="button">
               <span className="header__login-text">Account</span>{' '}
               <RxDividerVertical />{' '}

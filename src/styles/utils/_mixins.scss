@@ -89,3 +89,22 @@
   cursor: pointer;
   transition: all, .3s;
 }
+
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin button-style {
+
+  color: #fff;
+  border: none;
+  padding: $button-padding;
+  border-radius: $border-radius;
+  cursor: pointer;
+  font-size: $font-size-base;
+  transition: background-color 0.3s;
+
+
+}

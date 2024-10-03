@@ -151,13 +151,21 @@
   }
 
 
-  &__search-input, &__search-input:focus {
+  &__search-input {
     padding-block: .8rem;
     padding-inline: 1.2rem;
     border-radius: 3rem;
     border: 2px solid $text-color-secondary;
     width: 100%;
-    max-width: 450px;
+    max-width: 500px;
+
+&:active, &:focus {
+  border: 2px solid $text-color-secondary;
+}
+
+    @include mobile {
+      max-width: max-content;
+    }
   }
 
   &__search-input {

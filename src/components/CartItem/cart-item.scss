@@ -11,9 +11,11 @@
   border-radius: 2rem;
 
   @include mobile {
-    flex-direction: column;
+    //flex-direction: column;
     gap: 1rem;
-    padding-bottom: 3rem;
+
+    align-items: center;
+
   }
   
   &__image {
@@ -21,7 +23,8 @@
     aspect-ratio: 1;
 
     @include mobile {
-      width: 12rem;
+      width: 50%;
+      //height: 9rem;
     }
   }
 
@@ -30,6 +33,7 @@
     flex-direction: column;
     justify-content: center;
     gap: .5rem;
+    padding-right: 1rem;
 
     @include  mobile {
       align-items: center;
@@ -43,7 +47,8 @@
       margin-bottom: 0;
 
       @include mobile {
-        font-size: 2rem;
+        font-size: 1.4rem;
+        white-space: nowrap;
       }
 
 
@@ -51,6 +56,20 @@
 
     &__size {
       font-size: $fz-normal;
+        @include mobile {
+          display: none;
+        }
+    }
+
+    &__pricing {
+      display: none;
+      font-family: "Proxima Nova Bold", sans-serif;
+      font-size: 2rem;
+      @include mobile {
+        display: block;
+        text-align: center;
+        margin-block: .5rem;
+      }
     }
 
     &__controls {
@@ -62,16 +81,16 @@
       font-size: $fz-normal;
 
       @include mobile {
-        gap: 1.2rem;
-
+        gap: .6rem;
+        font-size: 1.5rem;
       }
 
       &__button{
        @include transparent-btn;
 
       @include mobile {
-        padding-block: .8rem;
-        padding-inline: 1.15rem;
+        padding-block: .4rem;
+        padding-inline: .95rem;
       }
 
         &:hover {
@@ -84,13 +103,18 @@
         padding-inline: .8rem;
 
         @include mobile {
-          padding-inline: 1.3rem;
+          padding-inline: 1.05rem;
         }
       }
     }
   }
 
   &__prices {
+
+    @include mobile {
+      display: none;
+    }
+
     &__price {
       font-size: $fz-normal;
       font-family: "Proxima Nova Bold", sans-serif;

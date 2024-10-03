@@ -28,23 +28,34 @@ function Footer() {
 
   return (
     <footer className="footer">
-      <div className="footer__info">
-        <Link to="/">
-          <img className="footer__logo" src={footerLogo} alt="Saladly logo" />
-        </Link>
-        <address className="footer__address">
-          <FaMapMarkedAlt /> 10 Olvera St, Los Angeles, California
-        </address>
-        <a className="footer__phone" href="tel:+1554567910">
-          <FaPhoneVolume /> +1 (554) 567-910
-        </a>
-        <a className="footer__email" href="mailto:info@saladly.com">
-          <IoMail /> info@saladly.com
-        </a>
-        <div className="footer__divider"></div>
+      <div className="footer__container">
+        <div className="footer__info">
+          <Link to="/">
+            <img className="footer__logo" src={footerLogo} alt="Saladly logo" />
+          </Link>
+          <address className="footer__address">
+            <FaMapMarkedAlt /> 10 Olvera St, Los Angeles, California
+          </address>
+          <a className="footer__phone" href="tel:+1554567910">
+            <FaPhoneVolume /> +1 (554) 567-910
+          </a>
+          <a className="footer__email" href="mailto:info@saladly.com">
+            <IoMail /> info@saladly.com
+          </a>
+          <div className="footer__divider"></div>
+        </div>
+
+        <div id="map" className="footer__map"></div>
       </div>
 
-      <div id="map" className="footer__map"></div>
+      <div className="footer__copyright-info">
+        <p className="footer__copyright">
+          © <time dateTime="2024">2024</time> Saladly. All Rights Reserved.
+        </p>
+        <a href="#" className="footer__privacy-policy">
+          Privacy Policy
+        </a>
+      </div>
     </footer>
   );
 }
