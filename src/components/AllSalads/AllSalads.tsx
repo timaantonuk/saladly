@@ -1,7 +1,7 @@
 import './all-salads.scss';
 import SaladCard from '../SaladCard/SaladCard.tsx';
 import { useEffect, useState } from 'react';
-import client from '../../sanityClient.ts';
+import axios from 'axios'; // Import Axios
 
 export interface ISalad {
   name: string;
@@ -17,24 +17,19 @@ export interface ISalad {
 
 function AllSalads() {
   const [salads, setSalads] = useState<ISalad[]>([]);
+  const sanityAPI = `https://tgg25nr2.api.sanity.io/v1/data/query/production?query=*[_type == "salad"]{name, description, price, calories, protein, carbs, fat, weight, "imageUrl": image.asset->url}`;
 
   useEffect(() => {
-    client
-      .fetch(
-        `*[_type == "salad"]{
-          name,
-          description,
-          price,
-          calories,
-          protein,
-          carbs,
-          fat,
-          weight,
-          "imageUrl": image.asset->url
-        }`,
-      )
-      .then((data) => setSalads(data))
-      .catch(console.error);
+    const fetchSalads = async () => {
+      try {
+        const response = await axios.get(sanityAPI); // Make a GET request using Axios
+        setSalads(response.data.result); // Access the data from the response
+      } catch (error) {
+        console.error('Error fetching salads:', error); // Handle errors
+      }
+    };
+
+    fetchSalads(); // Call the function to fetch data
   }, []);
 
   console.log(salads);
