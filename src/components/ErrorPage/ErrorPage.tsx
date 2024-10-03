@@ -4,7 +4,7 @@ import { BiSolidError } from 'react-icons/bi';
 import { FaSadTear } from 'react-icons/fa';
 
 function ErrorPage() {
-  const error = useRouteError();
+  const error = useRouteError() as { statusText?: string; message?: string };
   console.error(error);
 
   return (
