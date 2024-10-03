@@ -1,0 +1,62 @@
+@import '../../styles/utils/_variables.scss';
+@import '../../styles/utils/_mixins.scss';
+
+.footer {
+
+  @include container;
+  background-color: $accent-color-2;
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+  padding-block: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  //gap: 1rem;
+
+  @include mobile {
+    flex-direction: column;
+  }
+
+  &__info {
+    display: flex;
+    flex-direction: column;
+
+  }
+
+  &__logo {
+    width: 20rem;
+    margin-bottom: 3rem;
+    transform: translateX(-10px);
+  }
+
+  &__title {
+    @include title;
+  }
+  
+  &__address, &__phone, &__email {
+    font-family: "Proxima Nova Light", sans-serif;
+    font-style: italic;
+    cursor: pointer;
+    font-size: 1.1rem;
+    margin-bottom: .3rem;
+    //font-size: $fz-normal;
+  }
+
+  &__divider {
+    margin-top: 1rem;
+    width: 100%;
+    height: 1px;
+    background-color: black;
+  }
+
+  &__map {
+    width: 50%;
+    height: 17rem;
+    border-radius: 4rem;
+
+    @include mobile {
+      width: 100%;
+      margin-top: 2rem;
+    }
+  }
+}

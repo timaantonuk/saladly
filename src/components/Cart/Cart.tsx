@@ -1,7 +1,7 @@
 import './cart.scss';
 import CartItem from '../CartItem/CartItem.tsx';
 
-function Cart(props) {
+function Cart() {
   return (
     <>
       <section className="cart">

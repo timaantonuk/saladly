@@ -1,4 +1,3 @@
-import React from 'react';
 import './pagination.scss';
 
 function Pagination() {
@@ -34,7 +33,7 @@ function Pagination() {
         </ul>
       </nav>
 
-      <div style={{ width: '100%', height: '80px' }}></div>
+      {/*<div style={{ width: '100%', height: '80px' }}></div>*/}
     </>
   );
 }

@@ -1,4 +1,3 @@
-import React from 'react';
 import './salad-card.scss';
 import { FaPlusCircle } from 'react-icons/fa';
 

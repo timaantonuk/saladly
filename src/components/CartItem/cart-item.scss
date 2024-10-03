@@ -104,6 +104,11 @@
     @include transparent-btn;
     padding: 1rem;
 
+    &:hover {
+      background-color: $accent-color-1;
+      color: $text-color-light
+    }
+
     @include mobile {
       display: none;
     }

@@ -1,11 +1,20 @@
-import React from 'react';
+import { useState } from 'react';
 import './header.scss';
 import logo from '../../assets/logo.png';
-import { IoCartSharp, IoClose, IoPersonCircleSharp } from 'react-icons/io5';
+import { IoCartSharp, IoPersonCircleSharp } from 'react-icons/io5';
 import { RxDividerVertical } from 'react-icons/rx';
 import { Link } from 'react-router-dom';
+import MobileMenuModal from '../MobileMenuModal/MobileMenuModal.tsx';
 
-function Header({ handleMobileModalOpen, isOpen }) {
+function Header() {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  function handleMobileModalOpen() {
+    setIsMobileMenuOpen((prevState) => !prevState);
+  }
+
+  console.log(isMobileMenuOpen);
+
   return (
     <>
       <header className="header">
@@ -24,17 +33,20 @@ function Header({ handleMobileModalOpen, isOpen }) {
             onClick={handleMobileModalOpen}
             className="header__mobile-menu"
           >
-            <div className="header__mobile-burger">
+            <div
+              className="header__mobile-burger"
+              onClick={() => console.log(isMobileMenuOpen)}
+            >
               <div
                 className={
-                  isOpen
+                  isMobileMenuOpen
                     ? 'header__arrow header__arrow--rotate-right'
                     : 'header__arrow'
                 }
               ></div>
               <div
                 className={
-                  isOpen
+                  isMobileMenuOpen
                     ? 'header__arrow header__arrow--rotate-left'
                     : 'header__arrow'
                 }
@@ -66,6 +78,10 @@ function Header({ handleMobileModalOpen, isOpen }) {
           </Link>
         </div>
       </header>
+      <MobileMenuModal
+        isOpen={isMobileMenuOpen}
+        handleMobileModalOpen={handleMobileModalOpen}
+      />
     </>
   );
 }

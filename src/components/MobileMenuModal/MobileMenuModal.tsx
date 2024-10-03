@@ -1,8 +1,23 @@
-import React from 'react';
 import './mobile-menu-modal.scss';
 import { IoCartSharp, IoPersonCircleSharp } from 'react-icons/io5';
+import { useNavigate } from 'react-router-dom';
 
-function MobileMenuModal({ isOpen }) {
+interface IMobileMenuModalProps {
+  isOpen: boolean;
+  handleMobileModalOpen: () => void;
+}
+
+function MobileMenuModal({
+  isOpen,
+  handleMobileModalOpen,
+}: IMobileMenuModalProps) {
+  const navigate = useNavigate();
+
+  function handleGoToCart() {
+    handleMobileModalOpen(); // Закрываем модальное окно
+    navigate('/cart'); // Перенаправляем пользователя на страницу корзины
+  }
+
   return (
     <div
       className={
@@ -12,14 +27,18 @@ function MobileMenuModal({ isOpen }) {
       }
     >
       <ul className="mobile-menu-modal__list">
-        <li className="mobile-menu-modal__item">
+        <button
+          className="mobile-menu-modal__item"
+          onClick={handleMobileModalOpen}
+        >
           <span className="mobile-menu-modal__span">My Account</span>
           <IoPersonCircleSharp style={{ width: '30px', height: '30px' }} />
-        </li>
-        <li className="mobile-menu-modal__item">
-          <span className="mobile-menu-modal__span">Go to Cart</span>{' '}
+        </button>
+
+        <button className="mobile-menu-modal__item" onClick={handleGoToCart}>
+          <span className="mobile-menu-modal__span">Go to Cart</span>
           <IoCartSharp style={{ width: '30px', height: '30px' }} />
-        </li>
+        </button>
       </ul>
     </div>
   );

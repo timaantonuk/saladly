@@ -1,4 +1,3 @@
-import React from 'react';
 import './cart-item.scss';
 import { IoCloseSharp } from 'react-icons/io5';
 
