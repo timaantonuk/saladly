@@ -1,0 +1,185 @@
+@import '../../styles/utils/variables';
+@import '../../styles/utils/mixins';
+
+// Variables
+$primary-color: #005cf0;
+$secondary-color: #f0f0f0;
+$text-color: #333;
+$border-radius: 8px;
+$spacing-unit: 16px;
+$font-size-base: 16px;
+$button-padding: 10px 20px;
+
+// Mixins
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin button-style {
+  background-color: $primary-color;
+  color: #fff;
+  border: none;
+  padding: $button-padding;
+  border-radius: $border-radius;
+  cursor: pointer;
+  font-size: $font-size-base;
+  transition: background-color 0.3s;
+
+  &:hover {
+    background-color: darken($primary-color, 10%);
+  }
+}
+
+.signup {
+  font-family: "Proxima Nova", sans-serif;
+  background-color: $bg-color;
+  @include container;
+  border-radius: 0;
+  display: flex;
+
+  @include mobile {
+    flex-direction: column-reverse;
+    gap: 2rem;
+  }
+
+
+  &__left-panel {
+    border-top-left-radius: 3rem;
+    border-bottom-left-radius: 3rem;
+    flex: 1;
+    background-color: $accent-color-1;
+    color: $text-color;
+    padding: $spacing-unit * 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    gap: 2rem;
+
+    @include mobile {
+      display: none;
+    }
+
+    &__title {
+      font-size: 2rem;
+      margin-bottom: $spacing-unit;
+    }
+
+
+  }
+
+  &__text {
+    //font-size: $fz-normal;
+    //font-family: "Proxima Nova Light", sans-serif;
+    margin-bottom: $spacing-unit * 2;
+  }
+
+  &__link {
+    @include button;
+    background-color: $accent-dark;
+    padding-block: 1.5rem;
+    color: $text-color-light;
+    border-radius: 1rem;
+  }
+
+  &__right-panel {
+    border-top-right-radius: 3rem;
+    border-bottom-right-radius: 3rem;
+    flex: 1;
+    background-color: #fff;
+    padding: $spacing-unit * 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    @include mobile {
+      border-radius: 3rem;
+    }
+
+    @include mobile {
+      flex: 0
+    }
+
+  }
+
+  &__left-panel, &__right-panel {
+    @include mobile {
+      flex: 100%;
+    }
+
+  }
+
+  &__form {
+
+    display: flex;
+    flex-direction: column;
+
+    &-title {
+      @include title;
+      text-align: center;
+      margin-bottom: $spacing-unit * 2;
+    }
+
+    .signup__input {
+      width: 100%;
+      padding: $spacing-unit;
+      margin-bottom: $spacing-unit;
+      border: 1px solid #ccc;
+      border-radius: $border-radius;
+      font-size: $font-size-base;
+    }
+
+    .signup__button {
+      @include button;
+      //@include button-style;
+      width: 100%;
+      font-size: $fz-normal;
+      padding-block: 1.3rem;
+      margin-block: $spacing-unit * 2;
+
+
+    }
+  }
+
+  &__socials {
+    text-align: center;
+
+    &-text {
+      margin-bottom: $spacing-unit;
+    }
+
+    &-icons {
+      @include flex-center;
+      gap: 1rem;
+
+      .signup__socials-icon {
+        padding: $button-padding;
+        border-radius: 50%;
+        font-weight: bold;
+        text-align: center;
+        display: inline-block;
+
+        &--facebook {
+          background-color: #3b5998;
+        }
+
+        &--google {
+          background-color: #db4a39;
+        }
+
+        &--apple {
+          background-color: #0077b5;
+        }
+      }
+    }
+  }
+
+  &__sign-in {
+    text-align: center;
+    color: red;
+    margin-bottom: 1rem;
+  }
+
+}

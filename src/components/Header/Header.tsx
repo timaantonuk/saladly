@@ -62,12 +62,13 @@ function Header() {
         />
 
         <div className="header__buttons">
-          <button className="header__login-button" type="button">
-            {' '}
-            <span className="header__login-text">Account</span>{' '}
-            <RxDividerVertical />{' '}
-            <IoPersonCircleSharp style={{ width: '30px', height: '30px' }} />
-          </button>
+          <Link to="/signup">
+            <button className="header__login-button" type="button">
+              <span className="header__login-text">Account</span>{' '}
+              <RxDividerVertical />{' '}
+              <IoPersonCircleSharp style={{ width: '30px', height: '30px' }} />
+            </button>
+          </Link>
 
           <Link to="/cart">
             <button className="header__cart-button" type="button">
