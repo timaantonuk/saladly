@@ -20,6 +20,8 @@
     font-family: "Proxima Nova Light", sans-serif;
     text-align: center;
     color: $text-color-secondary;
+    max-height: 3rem;
+    min-height: 3rem;
   }
   
   &__kcal-info {
