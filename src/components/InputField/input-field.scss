@@ -1,0 +1,16 @@
+@import '../../styles/utils/variables';
+@import '../../styles/utils/mixins';
+
+.input {
+  width: 100%;
+  padding: $spacing-unit;
+  margin-bottom: $spacing-unit;
+  border: 1px solid $input-border-color;
+  border-radius: $border-radius;
+  font-size: $font-size-base;
+
+  &:focus, &:active {
+    border: 1px solid $input-border-color;
+
+  }
+}

@@ -17,7 +17,7 @@ export interface ISalad {
 
 function AllSalads() {
   const [salads, setSalads] = useState<ISalad[]>([]);
-  const sanityAPI = `https://tgg25nr2.api.sanity.io/v1/data/query/production?query=*[_type == "salad"]{name, description, price, calories, protein, carbs, fat, weight, "imageUrl": image.asset->url}`;
+  const sanityAPI = `https://tgg25nr2.api.sanity.io/v1/data/query/production?query=*[_type == "salad"]{name, description, price, calories, protein, carbs, fat, weight, popularity, filters, "imageUrl": image.asset->url}`;
 
   useEffect(() => {
     const fetchSalads = async () => {
@@ -30,7 +30,7 @@ function AllSalads() {
     };
 
     fetchSalads(); // Call the function to fetch data
-  }, []);
+  });
 
   console.log(salads);
 

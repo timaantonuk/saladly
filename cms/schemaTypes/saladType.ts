@@ -45,6 +45,30 @@ export default {
       type: 'number',
     },
     {
+      name: 'popularity',
+      title: 'Popularity (from 1 to 5)',
+      type: 'number',
+    },
+    {
+      name: 'filters',
+      title: 'Filters (vegetarian, meat, hot, pasta)',
+      type: 'array',
+      of: [
+        {
+          type: 'string',
+          options: {
+            list: [
+              {title: 'Vegetarian', value: 'vegetarian'},
+              {title: 'Meat', value: 'meat'},
+              {title: 'Hot', value: 'hot'},
+              {title: 'Pasta', value: 'pasta'},
+            ],
+            layout: 'tags',
+          },
+        },
+      ],
+    },
+    {
       name: 'image',
       title: 'Image',
       type: 'image',

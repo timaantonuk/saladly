@@ -1,0 +1,23 @@
+@import '../../styles/utils/variables';
+@import '../../styles/utils/mixins';
+
+.auth-form {
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  &__title {
+    font-size: 2rem;
+    margin-bottom: $spacing-unit;
+  }
+  &__link {
+    text-align: center;
+    color: $text-color;
+    margin-bottom: 1rem;
+  }
+  
+  &__span {
+    text-decoration: underline;
+  }
+}

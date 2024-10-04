@@ -83,36 +83,6 @@
 
   }
 
-  &__form {
-
-    display: flex;
-    flex-direction: column;
-
-    &-title {
-      @include title;
-      text-align: center;
-      margin-bottom: $spacing-unit * 2;
-    }
-
-    .signup__input {
-      width: 100%;
-      padding: $spacing-unit;
-      margin-bottom: $spacing-unit;
-      border: 1px solid #ccc;
-      border-radius: $border-radius;
-      font-size: $font-size-base;
-    }
-
-    .signup__button {
-      @include button;
-      width: 100%;
-      font-size: $fz-normal;
-      padding-block: 1.3rem;
-      margin-block: $spacing-unit * 2;
-
-
-    }
-  }
 
   &__socials {
     text-align: center;
@@ -135,16 +105,6 @@
         color: $accent-color-1;
       }
     }
-  }
-
-  &__sign-in {
-    text-align: center;
-    color: $text-color;
-    margin-bottom: 1rem;
-  }
-
-  &__span {
-    text-decoration: underline;
   }
 
 }

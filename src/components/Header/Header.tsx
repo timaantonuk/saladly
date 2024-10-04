@@ -13,7 +13,7 @@ function Header() {
     setIsMobileMenuOpen((prevState) => !prevState);
   }
 
-  console.log(isMobileMenuOpen);
+  // console.log(isMobileMenuOpen);
 
   return (
     <>

@@ -1,0 +1,10 @@
+@import '../../styles/utils/variables';
+@import '../../styles/utils/mixins';
+
+.form-button {
+  @include button;
+  width: 100%;
+  font-size: $fz-normal;
+  padding-block: 1.3rem;
+  margin-block: $spacing-unit * 2;
+}
