@@ -1,6 +1,11 @@
 import './form-button.scss';
 
-function FormButton({ onClick, text }) {
+interface FormButtonProps {
+  onClick: () => void;
+  text: string;
+}
+
+function FormButton({ onClick, text }: FormButtonProps) {
   return (
     <button className="form-button" type="button" onClick={onClick}>
       {text}
