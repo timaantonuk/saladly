@@ -1,24 +1,31 @@
 import { useEffect, useState } from 'react';
-import { auth, db } from '../../firebase/firebase.js';
+import { auth, db } from '../../firebase/firebase.ts';
 import { doc, getDoc } from 'firebase/firestore';
-import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import './user-account.scss';
 
+// Интерфейс для данных пользователя
+interface IUserDetails {
+  firstName: string;
+  email: string;
+}
+
 function UserAccount() {
-  const [userDetails, setUserDetails] = useState(null);
+  const [userDetails, setUserDetails] = useState<IUserDetails | null>(null); // Указываем, что состояние может быть либо объектом IUserDetails, либо null
   const navigate = useNavigate();
 
-  const fetchUserData = async () => {
+  const fetchUserData = async (): Promise<void> => {
     auth.onAuthStateChanged(async (user) => {
-      console.log(user);
-      const docRef = doc(db, 'Users', user.uid);
-      const docSnap = await getDoc(docRef);
-      if (docSnap.exists()) {
-        setUserDetails(docSnap.data());
-        console.log(docSnap.data());
+      if (user) {
+        const docRef = doc(db, 'Users', user.uid);
+        const docSnap = await getDoc(docRef);
+        if (docSnap.exists()) {
+          setUserDetails(docSnap.data() as IUserDetails); // Приведение типов
+        } else {
+          console.log('User document does not exist.');
+        }
       } else {
-        console.log('user is not logged in');
+        console.log('User is not logged in');
       }
     });
   };
@@ -27,13 +34,13 @@ function UserAccount() {
     fetchUserData();
   }, []);
 
-  const handleLogout = async () => {
+  const handleLogout = async (): Promise<void> => {
     try {
       await auth.signOut();
       navigate('/');
-      console.log('user logged out successfully');
+      console.log('User logged out successfully');
     } catch (error) {
-      console.error('Error logging out', error.message);
+      console.error('Error logging out', (error as Error).message);
     }
   };
 

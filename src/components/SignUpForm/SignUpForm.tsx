@@ -12,6 +12,13 @@ import { setDoc, doc } from 'firebase/firestore';
 
 import { toast } from 'react-toastify';
 
+export interface IFormField {
+  type: 'text' | 'email' | 'password'; // допустимые типы input
+  placeholder: string;
+  value: string;
+  onChange: (value: string) => void; // функция, принимающая новое значение
+}
+
 function SignUpForm() {
   const [user, setUser] = useState({
     name: '',
@@ -40,7 +47,8 @@ function SignUpForm() {
         position: 'top-center',
       });
     } catch (error) {
-      console.log(error.message);
+      const err = error as Error;
+      console.error(err.message);
       toast.error('Error in registration!', {
         position: 'bottom-center',
       });
@@ -48,7 +56,7 @@ function SignUpForm() {
     navigate('/account');
   };
 
-  const fields = [
+  const fields: IFormField[] = [
     {
       type: 'text',
       placeholder: 'Full Name',

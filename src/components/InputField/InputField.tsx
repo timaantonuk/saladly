@@ -1,6 +1,13 @@
 import './input-field.scss';
 
-function InputField({ type, placeholder, value, onChange }) {
+interface InputFieldProps {
+  type: 'text' | 'email' | 'password'; // Узкий тип для полей ввода
+  placeholder: string;
+  value: string;
+  onChange: (value: string) => void; // Функция onChange принимает строковое значение
+}
+
+function InputField({ type, placeholder, value, onChange }: InputFieldProps) {
   return (
     <input
       type={type}

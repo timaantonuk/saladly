@@ -13,6 +13,7 @@
     "@reduxjs/toolkit": "^2.2.7",
     "@sanity/client": "^6.22.0",
     "@sanity/image-url": "^1.0.2",
+    "@types/firebase": "^3.2.1",
     "axios": "^1.7.7",
     "firebase": "^10.14.0",
     "mapbox-gl": "^3.7.0",

@@ -2,6 +2,17 @@ import InputField from '../InputField/InputField.tsx';
 import FormButton from '../FormButton/FormButton.tsx';
 import './auth-form.scss';
 import { Link } from 'react-router-dom';
+import { IFormField } from '../SignUpForm/SignUpForm.tsx';
+
+interface IAuthProps {
+  title: string;
+  fields: IFormField[];
+  buttonText: string;
+  onSubmit: (formData: object) => void;
+  linkPath: string;
+  linkText: string;
+  spanText: string;
+}
 
 function AuthForm({
   title,
@@ -11,26 +22,31 @@ function AuthForm({
   linkText,
   linkPath,
   spanText,
-}) {
-  const handleSubmit = (e) => {
+}: IAuthProps) {
+  const handleSubmit = (e: { preventDefault: () => void }) => {
     e.preventDefault();
 
-    const formData = fields.reduce((acc, field) => {
-      if (field.type === 'email') acc.email = field.value;
-      if (field.type === 'password') acc.password = field.value;
-      if (field.type === 'text') acc.name = field.value; // полагаем, что это name
-      return acc;
-    }, {});
+    const formData = fields.reduce(
+      (
+        acc: { email: string; password: string; name: string },
+        field: IFormField,
+      ) => {
+        if (field.type === 'email') acc.email = field.value;
+        if (field.type === 'password') acc.password = field.value;
+        if (field.type === 'text') acc.name = field.value;
+        return acc;
+      },
+      { email: '', password: '', name: '' },
+    );
 
     onSubmit(formData);
-    // console.log(formData);
   };
 
   return (
     <form className="auth-form">
       <h2 className="auth-form__title">{title}</h2>
 
-      {fields.map((field, index) => (
+      {fields.map((field: IFormField, index) => (
         <InputField
           key={index}
           type={field.type}
