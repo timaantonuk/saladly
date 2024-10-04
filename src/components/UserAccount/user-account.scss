@@ -1,0 +1,10 @@
+@import '../../styles/utils/variables';
+@import '../../styles/utils/mixins';
+
+.user-account {
+  @include container;
+  border-radius: 0;
+  &__heading {
+    @include title;
+  }
+}

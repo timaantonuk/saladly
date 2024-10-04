@@ -30,7 +30,7 @@ function AllSalads() {
     };
 
     fetchSalads(); // Call the function to fetch data
-  });
+  }, [sanityAPI]);
 
   console.log(salads);
 

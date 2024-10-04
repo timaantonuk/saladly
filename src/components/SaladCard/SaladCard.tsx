@@ -17,7 +17,12 @@ function SaladCard({
   return (
     <article className="salad-card">
       <div className="salad-card__info">
-        <img src={imageUrl} alt={name} className="salad-card__image" />
+        <img
+          src={imageUrl}
+          alt={name}
+          loading="lazy"
+          className="salad-card__image"
+        />
         <h3 className="salad-card__heading">{name}</h3>
         <p className="salad-card__description">{description}</p>
       </div>

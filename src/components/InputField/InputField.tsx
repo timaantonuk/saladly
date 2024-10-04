@@ -7,7 +7,7 @@ function InputField({ type, placeholder, value, onChange }) {
       className="input"
       placeholder={placeholder}
       value={value}
-      onChange={(e) => onChange(e.target.value)}
+      onChange={(e) => onChange(e.target.value)} // Передаем значение напрямую
     />
   );
 }
