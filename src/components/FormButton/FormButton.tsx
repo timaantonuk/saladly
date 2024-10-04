@@ -1,7 +1,7 @@
 import './form-button.scss';
 
 interface FormButtonProps {
-  onClick: () => void;
+  onClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
   text: string;
 }
 
