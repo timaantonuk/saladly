@@ -1,5 +1,4 @@
 import './filters-and-sorting.scss';
-import { IoChevronDownSharp } from 'react-icons/io5';
 
 function FiltersAndSorting() {
   return (
@@ -15,8 +14,18 @@ function FiltersAndSorting() {
       </ul>
 
       <button type="button" className="sorting-button">
-        <IoChevronDownSharp /> Sort by{' '}
-        <span className="sorting-button__sort-type">popularity</span>
+        Sort by{' '}
+        <select className="sorting-button__sort-type">
+          <option value="price-low-first" selected>
+            price (low to high)
+          </option>
+          <option value="price-high-first">price (high to low)</option>
+          <option value="popularity-high-first">
+            popularity (high to low)
+          </option>
+          <option value="popularity-low-first">popularity (low to high)</option>
+          <option value="alphabetical">alphabetical</option>
+        </select>
       </button>
     </nav>
   );

@@ -49,3 +49,9 @@ a {
 #root {
   position: relative;
 }
+
+select {
+  outline: none;
+  border: none;
+  background-color: inherit;
+}

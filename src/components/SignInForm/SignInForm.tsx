@@ -1,15 +1,15 @@
 import './sign-in-form.scss';
 import formLogo from '../../assets/footer-logo.png';
-import { FaGoogle } from 'react-icons/fa6';
-import { FaApple, FaFacebook } from 'react-icons/fa';
 import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
-import { signInWithEmailAndPassword } from 'firebase/auth';
+import { signInWithEmailAndPassword, signInWithPopup } from 'firebase/auth';
 import AuthForm from '../AuthForm/AuthForm.tsx';
-import { auth } from '../../firebase/firebase';
+import { auth, db, provider } from '../../firebase/firebase';
 import { toast } from 'react-toastify';
-
+import { setDoc, getDoc, doc } from 'firebase/firestore';
 import { IFormField } from '../SignUpForm/SignUpForm.tsx';
+import { FcGoogle } from 'react-icons/fc';
+import { CustomFirebaseError } from '../../types.ts';
 
 function SignInForm() {
   // Типизация состояния пользователя
@@ -37,6 +37,47 @@ function SignInForm() {
       }
 
       toast.error('Error in login!', {
+        position: 'bottom-center',
+      });
+    }
+  };
+
+  const handleLoginWithGoogle = async () => {
+    try {
+      const result = await signInWithPopup(auth, provider);
+      const user = result.user;
+
+      if (user) {
+        const userRef = doc(db, 'Users', user.uid);
+        const userSnap = await getDoc(userRef);
+
+        if (userSnap.exists()) {
+          // Пользователь уже есть в базе данных, можно получить его данные
+          console.log('User data from database:', userSnap.data());
+        } else {
+          // Если по какой-то причине пользователь не был добавлен ранее, можно добавить его сейчас
+          console.log('User not found in database, consider adding user data.');
+          await setDoc(userRef, {
+            email: user.email,
+            firstName: user.displayName,
+            avatar: user.photoURL,
+          });
+        }
+        toast.success('Successfully logged in!', {
+          position: 'top-center',
+        });
+        navigate('/account');
+      }
+    } catch (error) {
+      const firebaseError = error as CustomFirebaseError;
+      const errorCode = firebaseError.code;
+      const errorMessage = firebaseError.message;
+      const email = firebaseError.customData?.email || 'No email available';
+
+      console.error(
+        `Error: ${errorCode}, Message: ${errorMessage}, Email: ${email}`,
+      );
+      toast.error('Error in logging in', {
         position: 'bottom-center',
       });
     }
@@ -89,16 +130,13 @@ function SignInForm() {
 
         <div className="signin__socials">
           <div className="signin__socials-icons">
-            <a href="#" className="signin__socials-icon">
-              <FaGoogle style={{ width: '2.5rem', height: '2.5rem' }} />
-            </a>
-            <a href="#" className="signin__socials-icon">
-              <FaFacebook style={{ width: '2.5rem', height: '2.5rem' }} />
-            </a>
-
-            <a href="#" className="signin__socials-icon">
-              <FaApple style={{ width: '2.5rem', height: '2.5rem' }} />
-            </a>
+            <button
+              className="signin__sign-in-helper"
+              onClick={handleLoginWithGoogle}
+            >
+              Sign In with Google{' '}
+              <FcGoogle style={{ transform: 'translateY(-1px)' }} />
+            </button>
           </div>
         </div>
       </div>

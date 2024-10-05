@@ -108,3 +108,25 @@
 
 
 }
+
+@mixin socials {
+  cursor: pointer;
+  text-align: center;
+  width: 50%;
+  align-self: center;
+  justify-self: center;
+  @include button;
+  background-color: transparent;
+  border: 2px solid $accent-color-1;
+  padding-block: .5rem;
+  color: $accent-color-1;
+
+  &:hover {
+    color: $text-color-light;
+    background-color: $accent-color-1;
+  }
+
+  &-text {
+    margin-bottom: $spacing-unit;
+  }
+}

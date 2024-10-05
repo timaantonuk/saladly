@@ -8,6 +8,7 @@ import './user-account.scss';
 interface IUserDetails {
   firstName: string;
   email: string;
+  avatar: string;
 }
 
 function UserAccount() {
@@ -34,6 +35,8 @@ function UserAccount() {
     fetchUserData();
   }, []);
 
+  console.log(userDetails);
+
   const handleLogout = async (): Promise<void> => {
     try {
       await auth.signOut();
@@ -52,6 +55,7 @@ function UserAccount() {
             Welcome {userDetails.firstName}
           </h3>
           <p>email - {userDetails.email}</p>
+          <img src={userDetails.avatar} alt="your avatar" />
           <button onClick={handleLogout}>Logout</button>
         </>
       ) : (

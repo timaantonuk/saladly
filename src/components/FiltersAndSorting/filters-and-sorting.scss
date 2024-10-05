@@ -50,6 +50,7 @@
   font-size: $fz-normal;
 
   &__sort-type {
+    cursor: pointer;
     font-family: "Proxima Nova Bold", sans-serif;
     color: $accent-color-3;
     text-decoration: underline;

@@ -1,16 +1,19 @@
 import './sign-up-form.scss';
-import { FaGoogle } from 'react-icons/fa6';
-import { FaApple, FaFacebook } from 'react-icons/fa';
 import formLogo from '../../assets/footer-logo.png';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
-import { createUserWithEmailAndPassword } from 'firebase/auth';
+import {
+  createUserWithEmailAndPassword,
+  signInWithPopup,
+  GoogleAuthProvider,
+} from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
 import AuthForm from '../AuthForm/AuthForm.tsx';
-import { auth, db } from '../../firebase/firebase';
+import { auth, db, provider } from '../../firebase/firebase';
 import { setDoc, doc } from 'firebase/firestore';
-
 import { toast } from 'react-toastify';
+import { FcGoogle } from 'react-icons/fc';
+import { CustomFirebaseError } from '../../types.ts';
 
 export interface IFormField {
   type: 'text' | 'email' | 'password'; // допустимые типы input
@@ -49,6 +52,45 @@ function SignUpForm() {
     } catch (error) {
       const err = error as Error;
       console.error(err.message);
+      toast.error('Error in registration!', {
+        position: 'bottom-center',
+      });
+    }
+    navigate('/account');
+  };
+
+  const handleRegisterWithGoogle = async () => {
+    try {
+      const result = await signInWithPopup(auth, provider);
+      const credential = GoogleAuthProvider.credentialFromResult(result);
+
+      if (credential) {
+        const token = credential.accessToken;
+        console.log(token);
+      }
+
+      const user = result.user;
+      if (user) {
+        await setDoc(doc(db, 'Users', user.uid), {
+          email: user.email,
+          firstName: user.displayName,
+          avatar: user.photoURL,
+        });
+        console.log('User data saved successfully.');
+        console.log(user.photoURL);
+        toast.success('Successfully registered!', {
+          position: 'top-center',
+        });
+      }
+    } catch (error) {
+      const firebaseError = error as CustomFirebaseError;
+      const errorCode = firebaseError.code;
+      const errorMessage = firebaseError.message;
+      const email = firebaseError.customData?.email || 'No email available';
+
+      console.error(
+        `Error: ${errorCode}, Message: ${errorMessage}, Email: ${email}`,
+      );
       toast.error('Error in registration!', {
         position: 'bottom-center',
       });
@@ -115,16 +157,13 @@ function SignUpForm() {
 
         <div className="signup__socials">
           <div className="signup__socials-icons">
-            <a href="#" className="signup__socials-icon">
-              <FaGoogle style={{ width: '2.5rem', height: '2.5rem' }} />
-            </a>
-            <a href="#" className="signup__socials-icon">
-              <FaFacebook style={{ width: '2.5rem', height: '2.5rem' }} />
-            </a>
-
-            <a href="#" className="signup__socials-icon">
-              <FaApple style={{ width: '2.5rem', height: '2.5rem' }} />
-            </a>
+            <button
+              className="signup__sign-up-helper"
+              onClick={handleRegisterWithGoogle}
+            >
+              Sign Up with Google{' '}
+              <FcGoogle style={{ transform: 'translateY(-1px)' }} />
+            </button>
           </div>
         </div>
       </div>
