@@ -16,7 +16,7 @@ function FiltersAndSorting() {
   const dispatch = useDispatch();
 
   const [filters, setFilters] = useState([
-    { name: 'All 🥗', selected: false, filterKey: 'all' },
+    { name: 'All 🥗', selected: true, filterKey: 'all' },
     { name: 'Vegetarian 🥦', selected: false, filterKey: 'vegetarian' },
     { name: 'Meat 🥓', selected: false, filterKey: 'meat' },
     { name: 'Hot 🌶️', selected: false, filterKey: 'hot' },
@@ -59,7 +59,14 @@ function FiltersAndSorting() {
                 : 'filter-menu__item'
             }
           >
-            <button className="filter-menu__button" type="button">
+            <button
+              className={
+                filter.selected
+                  ? 'filter-menu__button filter-menu__btn--selected'
+                  : 'filter-menu__button'
+              }
+              type="button"
+            >
               {filter.name}
             </button>
           </li>

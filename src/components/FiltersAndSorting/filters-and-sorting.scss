@@ -15,6 +15,11 @@
     padding-top: 0;
   }
 
+  &__btn--selected {
+    transition: all 0s;
+    color: $text-color-light;
+  }
+
   &__list {
     display: flex;
     gap: 1.5rem;
@@ -41,7 +46,9 @@
 
     &--selected {
       @include button;
+      transition: all, 0s;
       background-color: $accent-color-1;
+      color: $text-color-light;
 
       &:active, &:hover {
         background-color: $accent-color-1;
@@ -49,6 +56,7 @@
     }
   }
 }
+
 
 .sorting-button {
   font-size: $fz-normal;
