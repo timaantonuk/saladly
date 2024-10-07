@@ -1,7 +1,8 @@
 import './all-salads.scss';
 import SaladCard from '../SaladCard/SaladCard.tsx';
-import { useEffect, useState } from 'react';
-import axios from 'axios'; // Import Axios
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchSalads } from '../../store/slices/saladSlice/saladActions.ts'; // Import Axios
 
 export interface ISalad {
   name: string;
@@ -16,23 +17,30 @@ export interface ISalad {
 }
 
 function AllSalads() {
-  const [salads, setSalads] = useState<ISalad[]>([]);
-  const sanityAPI = `https://tgg25nr2.api.sanity.io/v1/data/query/production?query=*[_type == "salad"]{name, description, price, calories, protein, carbs, fat, weight, popularity, filters, "imageUrl": image.asset->url}`;
+  // const [salads, setSalads] = useState<ISalad[]>([]);
+  // const sanityAPI = `https://tgg25nr2.api.sanity.io/v1/data/query/production?query=*[_type == "salad"]{name, description, price, calories, protein, carbs, fat, weight, popularity, filters, "imageUrl": image.asset->url}`;
+  //
+  // useEffect(() => {
+  //   const fetchSalads = async () => {
+  //     try {
+  //       const response = await axios.get(sanityAPI); // Make a GET request using Axios
+  //       setSalads(response.data.result); // Access the data from the response
+  //     } catch (error) {
+  //       console.error('Error fetching salads:', error); // Handle errors
+  //     }
+  //   };
+  //
+  //   fetchSalads(); // Call the function to fetch data
+  // }, [sanityAPI]);
+
+  // console.log(salads);
+
+  const salads = useSelector((state) => state.salad.allSalads);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    const fetchSalads = async () => {
-      try {
-        const response = await axios.get(sanityAPI); // Make a GET request using Axios
-        setSalads(response.data.result); // Access the data from the response
-      } catch (error) {
-        console.error('Error fetching salads:', error); // Handle errors
-      }
-    };
-
-    fetchSalads(); // Call the function to fetch data
-  }, [sanityAPI]);
-
-  console.log(salads);
+    dispatch(fetchSalads());
+  }, []);
 
   return (
     <main className="salads-menu">

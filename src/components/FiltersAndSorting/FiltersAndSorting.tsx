@@ -16,7 +16,7 @@ function FiltersAndSorting() {
       <button type="button" className="sorting-button">
         Sort by{' '}
         <select className="sorting-button__sort-type">
-          <option value="price-low-first" selected>
+          <option value="price-low-first" defaultChecked>
             price (low to high)
           </option>
           <option value="price-high-first">price (high to low)</option>
