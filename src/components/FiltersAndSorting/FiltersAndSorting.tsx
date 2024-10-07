@@ -1,36 +1,34 @@
 import './filters-and-sorting.scss';
-import { useDispatch, useSelector } from 'react-redux';
-import {
-  filterByType,
-  SaladState,
-} from '../../store/slices/saladSlice/saladSlice.ts';
+import { useDispatch } from 'react-redux';
+import { filterByType } from '../../store/slices/saladSlice/saladSlice.ts';
 import { useState } from 'react';
+
+interface Ifilter {
+  name: string;
+  selected: boolean;
+  filterKey: string;
+}
 
 function FiltersAndSorting() {
   const dispatch = useDispatch();
-  const salads = useSelector((state: SaladState) => state.salad.allSalads);
 
   const [filters, setFilters] = useState([
-    { name: 'All 🥗', selected: false },
-    { name: 'Vegetarian 🥦', selected: false },
-    { name: 'Meat 🥓', selected: false },
-    { name: 'Hot 🌶️', selected: false },
-    { name: 'Pasta 🍝', selected: false },
+    { name: 'All 🥗', selected: false, filterKey: 'all' },
+    { name: 'Vegetarian 🥦', selected: false, filterKey: 'vegetarian' },
+    { name: 'Meat 🥓', selected: false, filterKey: 'meat' },
+    { name: 'Hot 🌶️', selected: false, filterKey: 'hot' },
+    { name: 'Pasta 🍝', selected: false, filterKey: 'pasta' },
   ]);
 
-  function handleFilterClick(filter, index) {
+  function handleFilterClick(filter: Ifilter, index: number) {
     setFilters((prevFilters) =>
       prevFilters.map((el, i) => ({
         ...el,
-        selected: index === i ? true : false,
+        selected: index === i,
       })),
     );
 
-    // console.log(filter.name);
-    const filterStr = filter.name.toLowerCase().slice(0, -3);
-    console.log(filterStr);
-
-    dispatch(filterByType(filterStr));
+    dispatch(filterByType(filter.filterKey));
   }
 
   return (

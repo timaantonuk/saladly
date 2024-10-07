@@ -1,46 +1,17 @@
 import './all-salads.scss';
 import SaladCard from '../SaladCard/SaladCard.tsx';
 import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { fetchSalads } from '../../store/slices/saladSlice/saladActions.ts'; // Import Axios
-
-export interface ISalad {
-  name: string;
-  description: string;
-  price: number;
-  calories: number;
-  protein: number;
-  carbs: number;
-  fat: number;
-  weight: string;
-  imageUrl: string;
-}
+import { useSelector } from 'react-redux';
+import { fetchSalads } from '../../store/slices/saladSlice/saladActions.ts';
+import { RootState, useAppDispatch } from '../../store/store.ts'; // Import Axios
 
 function AllSalads() {
-  // const [salads, setSalads] = useState<ISalad[]>([]);
-  // const sanityAPI = `https://tgg25nr2.api.sanity.io/v1/data/query/production?query=*[_type == "salad"]{name, description, price, calories, protein, carbs, fat, weight, popularity, filters, "imageUrl": image.asset->url}`;
-  //
-  // useEffect(() => {
-  //   const fetchSalads = async () => {
-  //     try {
-  //       const response = await axios.get(sanityAPI); // Make a GET request using Axios
-  //       setSalads(response.data.result); // Access the data from the response
-  //     } catch (error) {
-  //       console.error('Error fetching salads:', error); // Handle errors
-  //     }
-  //   };
-  //
-  //   fetchSalads(); // Call the function to fetch data
-  // }, [sanityAPI]);
-
-  // console.log(salads);
-
-  const salads = useSelector((state) => state.salad.allSalads);
-  const dispatch = useDispatch();
+  const salads = useSelector((state: RootState) => state.salad.allSalads);
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     dispatch(fetchSalads());
-  }, []);
+  }, [dispatch]);
 
   return (
     <main className="salads-menu">

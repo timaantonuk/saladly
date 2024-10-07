@@ -6,13 +6,6 @@ export interface CustomFirebaseError extends FirebaseError {
   };
 }
 
-export enum SaladType {
-  Vegetarian = 'vegetarian',
-  Meat = 'meat',
-  Hot = 'hot',
-  Pasta = 'pasta',
-}
-
 export type Salad = {
   price: number;
   description: string;
@@ -23,6 +16,6 @@ export type Salad = {
   fat: number;
   weight: number;
   name: string;
-  filters: SaladType[];
+  filters: string[];
   imageUrl: string;
 };

@@ -1,7 +1,7 @@
 import './salad-card.scss';
 import { FaPlusCircle } from 'react-icons/fa';
 
-import { ISalad } from '../AllSalads/AllSalads.tsx';
+import { Salad } from '../../types.ts';
 
 function SaladCard({
   name,
@@ -13,7 +13,7 @@ function SaladCard({
   carbs,
   fat,
   weight,
-}: ISalad) {
+}: Salad) {
   return (
     <article className="salad-card">
       <div className="salad-card__info">
