@@ -30,6 +30,35 @@ export const saladSlice = createSlice({
         );
       }
     },
+    sortByType: (state, action: PayloadAction<string>) => {
+      switch (action.payload) {
+        case 'price-low-first':
+          state.allSalads = [...state.allSalads].sort(
+            (salad1, salad2) => salad1.price - salad2.price,
+          );
+          break;
+        case 'price-high-first':
+          state.allSalads = [...state.allSalads].sort(
+            (salad1, salad2) => salad2.price - salad1.price,
+          );
+          break;
+        case 'popularity-low-first':
+          state.allSalads = [...state.allSalads].sort(
+            (salad1, salad2) => salad1.popularity - salad2.popularity,
+          );
+          break;
+        case 'popularity-high-first':
+          state.allSalads = [...state.allSalads].sort(
+            (salad1, salad2) => salad2.popularity - salad1.popularity,
+          );
+          break;
+        case 'alphabetical':
+          state.allSalads = [...state.allSalads].sort((salad1, salad2) =>
+            salad1.name.localeCompare(salad2.name),
+          );
+          break;
+      }
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(fetchSalads.fulfilled, (state, action) => {
@@ -40,6 +69,6 @@ export const saladSlice = createSlice({
   },
 });
 
-export const { filterByType } = saladSlice.actions;
+export const { filterByType, sortByType } = saladSlice.actions;
 
 export default saladSlice.reducer;

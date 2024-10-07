@@ -1,7 +1,10 @@
 import './filters-and-sorting.scss';
 import { useDispatch } from 'react-redux';
-import { filterByType } from '../../store/slices/saladSlice/saladSlice.ts';
-import { useState } from 'react';
+import {
+  filterByType,
+  sortByType,
+} from '../../store/slices/saladSlice/saladSlice.ts';
+import { useEffect, useState } from 'react';
 
 interface Ifilter {
   name: string;
@@ -20,6 +23,8 @@ function FiltersAndSorting() {
     { name: 'Pasta 🍝', selected: false, filterKey: 'pasta' },
   ]);
 
+  const [selectedOption, setSelectedOption] = useState('');
+
   function handleFilterClick(filter: Ifilter, index: number) {
     setFilters((prevFilters) =>
       prevFilters.map((el, i) => ({
@@ -30,6 +35,16 @@ function FiltersAndSorting() {
 
     dispatch(filterByType(filter.filterKey));
   }
+
+  function handleSort(event: React.ChangeEvent<HTMLSelectElement>) {
+    setSelectedOption(event.target.value);
+  }
+
+  useEffect(() => {
+    dispatch(sortByType(selectedOption));
+  }, [selectedOption]);
+
+  // console.log(selectedOption);
 
   return (
     <nav className="filter-menu">
@@ -53,10 +68,12 @@ function FiltersAndSorting() {
 
       <button type="button" className="sorting-button">
         Sort by{' '}
-        <select className="sorting-button__sort-type">
-          <option value="price-low-first" defaultChecked>
-            price (low to high)
-          </option>
+        <select
+          className="sorting-button__sort-type"
+          value={selectedOption}
+          onChange={handleSort}
+        >
+          <option value="price-low-first">price (low to high)</option>
           <option value="price-high-first">price (high to low)</option>
           <option value="popularity-high-first">
             popularity (high to low)
