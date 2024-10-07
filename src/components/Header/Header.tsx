@@ -1,19 +1,33 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './header.scss';
 import logo from '../../assets/logo.png';
 import { IoCartSharp, IoPersonCircleSharp } from 'react-icons/io5';
 import { RxDividerVertical } from 'react-icons/rx';
 import { Link } from 'react-router-dom';
 import MobileMenuModal from '../MobileMenuModal/MobileMenuModal.tsx';
+import { useDispatch } from 'react-redux';
+import { searchByName } from '../../store/slices/saladSlice/saladSlice.ts';
 
 function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [searchValue, setSearchValue] = useState('');
+
+  const dispatch = useDispatch();
 
   function handleMobileModalOpen() {
     setIsMobileMenuOpen((prevState) => !prevState);
   }
 
+  function handleInputChange(e: React.ChangeEvent<HTMLInputElement>) {
+    setSearchValue(e.target.value);
+  }
+
+  // console.log(searchValue);
   // console.log(isMobileMenuOpen);
+
+  useEffect(() => {
+    dispatch(searchByName(searchValue));
+  }, [searchValue]);
 
   return (
     <>
@@ -59,6 +73,8 @@ function Header() {
           className="header__search-input"
           type="text"
           placeholder="🔍  Search for a salad..."
+          value={searchValue}
+          onChange={(e) => handleInputChange(e)}
         />
 
         <div className="header__buttons">
