@@ -1,10 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit';
 import saladReducer from '../store/slices/saladSlice/saladSlice.ts';
+import cartReducer from '../store/slices/cartSlice/cartSlice.ts';
 import { useDispatch } from 'react-redux';
 
 export const store = configureStore({
   reducer: {
     salad: saladReducer,
+    cart: cartReducer,
   },
 });
 

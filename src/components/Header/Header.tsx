@@ -5,14 +5,35 @@ import { IoCartSharp, IoPersonCircleSharp } from 'react-icons/io5';
 import { RxDividerVertical } from 'react-icons/rx';
 import { Link } from 'react-router-dom';
 import MobileMenuModal from '../MobileMenuModal/MobileMenuModal.tsx';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { searchByName } from '../../store/slices/saladSlice/saladSlice.ts';
+import { calculateTotal } from '../../utilFunctions.ts';
+import { RootState } from '../../store/store.ts';
+
+function useDebounce(value: string, delay: number) {
+  const [debouncedValue, setDebouncedValue] = useState(value);
+
+  useEffect(() => {
+    const handler = setTimeout(() => {
+      setDebouncedValue(value);
+    }, delay);
+
+    return () => {
+      clearTimeout(handler);
+    };
+  }, [value, delay]);
+
+  return debouncedValue;
+}
 
 function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [searchValue, setSearchValue] = useState('');
 
+  const cartItems = useSelector((state: RootState) => state.cart.cartItems);
   const dispatch = useDispatch();
+
+  const debouncedSearchValue = useDebounce(searchValue, 500);
 
   function handleMobileModalOpen() {
     setIsMobileMenuOpen((prevState) => !prevState);
@@ -22,12 +43,9 @@ function Header() {
     setSearchValue(e.target.value);
   }
 
-  // console.log(searchValue);
-  // console.log(isMobileMenuOpen);
-
   useEffect(() => {
     dispatch(searchByName(searchValue));
-  }, [searchValue]);
+  }, [debouncedSearchValue]);
 
   return (
     <>
@@ -88,7 +106,9 @@ function Header() {
 
           <Link to="/cart">
             <button className="header__cart-button" type="button">
-              <span className="header__cart-text">100$</span>{' '}
+              <span className="header__cart-text">
+                {calculateTotal(cartItems)}$
+              </span>{' '}
               <RxDividerVertical />
               <IoCartSharp style={{ width: '30px', height: '30px' }} />
             </button>

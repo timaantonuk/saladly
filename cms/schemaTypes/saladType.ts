@@ -20,6 +20,11 @@ export default {
       type: 'number',
     },
     {
+      name: 'priceXl',
+      title: 'Price XL (USD)',
+      type: 'number',
+    },
+    {
       name: 'calories',
       title: 'Calories (kcal)',
       type: 'number',

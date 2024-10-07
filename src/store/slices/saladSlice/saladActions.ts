@@ -4,7 +4,7 @@ import axios from 'axios';
 export const fetchSalads = createAsyncThunk(
   'saladSlice/getSalads',
   function fetchSalads() {
-    const sanityAPI = `https://tgg25nr2.api.sanity.io/v1/data/query/production?query=*[_type == "salad"]{name, description, price, calories, protein, carbs, fat, weight, popularity, filters, "imageUrl": image.asset->url}`;
+    const sanityAPI = `https://tgg25nr2.api.sanity.io/v1/data/query/production?query=*[_type == "salad"]{name, description, price, priceXl, calories, protein, carbs, fat, weight, popularity, filters, "imageUrl": image.asset->url}`;
 
     const fetchSalads = async () => {
       try {

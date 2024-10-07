@@ -1,25 +1,24 @@
 import './cart-item.scss';
 import { IoCloseSharp } from 'react-icons/io5';
+import { ICartItem } from '../../types.ts';
 
-function CartItem() {
+function CartItem({ name, price, imageUrl, quantity, portion }: ICartItem) {
   return (
     <article className="cart-item">
-      <img
-        src="https://salateira.ua/wp-content/uploads/2020/02/caesar.png"
-        alt="Caesar salad"
-        className="cart-item__image"
-      />
+      <img src={imageUrl} alt="Caesar salad" className="cart-item__image" />
 
       <div className="cart-item__info">
-        <h4 className="cart-item__info__heading">Ceasar Salad</h4>
-        <p className="cart-item__info__size">Big portion</p>
-        <p className="cart-item__info__pricing">66.99$</p>
+        <h4 className="cart-item__info__heading">{name}</h4>
+        <p className="cart-item__info__size">
+          {portion === 'big' ? 'XL Size' : 'Medium Size'}
+        </p>
+        <p className="cart-item__info__pricing">{price}$</p>
 
         <div className="cart-item__info__controls">
           <button className="cart-item__info__controls__button cart-item__info__controls__button--minus ">
             -
           </button>
-          <span className="cart-item__info__controls__amount">1</span>
+          <span className="cart-item__info__controls__amount">{quantity}</span>
           <button className="cart-item__info__controls__button">+</button>
         </div>
       </div>
@@ -27,7 +26,7 @@ function CartItem() {
       <div className="cart-item__prices">
         <p className="cart-item__prices__price">
           Price for item -{' '}
-          <span className="cart-item__prices__price__span">66.99$</span>
+          <span className="cart-item__prices__price__span">{price}$</span>
         </p>
       </div>
 

@@ -52,6 +52,10 @@
   &__button {
     @include select-button;
 
+    &:focus {
+      background-color: $accent-light;
+    }
+
     @include mobile {
       font-size: 1rem;
     }
