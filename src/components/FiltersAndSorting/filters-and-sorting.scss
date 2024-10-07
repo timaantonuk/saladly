@@ -36,12 +36,16 @@
     padding-block: .8rem;
     padding-inline: 1.2rem;
     cursor: pointer;
+    transition: all, 0s;
 
-    @include hover;
 
     &--selected {
       @include button;
       background-color: $accent-color-1;
+
+      &:active, &:hover {
+        background-color: $accent-color-1;
+      }
     }
   }
 }
