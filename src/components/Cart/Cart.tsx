@@ -1,12 +1,11 @@
 import './cart.scss';
 import CartItem from '../CartItem/CartItem.tsx';
 import { useSelector } from 'react-redux';
-import { RootState, useAppDispatch } from '../../store/store.ts';
+import { RootState } from '../../store/store.ts';
 import { calculateTotal, calculateItem } from '../../utilFunctions.ts';
 
 function Cart() {
   const cartItems = useSelector((state: RootState) => state.cart.cartItems);
-  const dispatch = useAppDispatch();
 
   return (
     <>
