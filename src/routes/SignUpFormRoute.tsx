@@ -1,5 +1,5 @@
-import Header from '../components/Header/Header.tsx';
-import Footer from '../components/Footer/Footer.tsx';
+import Header from '../components/layout/Header/Header.tsx';
+import Footer from '../components/layout/Footer/Footer.tsx';
 import SignUpForm from '../components/SignUpForm/SignUpForm.tsx';
 
 function SignUpFormRoute() {

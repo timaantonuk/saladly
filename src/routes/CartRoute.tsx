@@ -1,6 +1,6 @@
-import Header from '../components/Header/Header.tsx';
+import Header from '../components/layout/Header/Header.tsx';
 import Cart from '../components/Cart/Cart.tsx';
-import Footer from '../components/Footer/Footer.tsx';
+import Footer from '../components/layout/Footer/Footer.tsx';
 
 function CartRoute() {
   return (

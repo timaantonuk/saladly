@@ -1,14 +1,14 @@
 import { useEffect, useState } from 'react';
 import './header.scss';
-import logo from '../../assets/logo.png';
+import logo from '../../../assets/logo.png';
 import { IoCartSharp, IoPersonCircleSharp } from 'react-icons/io5';
 import { RxDividerVertical } from 'react-icons/rx';
 import { Link } from 'react-router-dom';
 import MobileMenuModal from '../MobileMenuModal/MobileMenuModal.tsx';
 import { useDispatch, useSelector } from 'react-redux';
-import { searchByName } from '../../store/slices/saladSlice/saladSlice.ts';
-import { calculateTotal } from '../../utilFunctions.ts';
-import { RootState } from '../../store/store.ts';
+import { searchByName } from '../../../store/slices/saladSlice/saladSlice.ts';
+import { calculateTotal } from '../../../utilFunctions.ts';
+import { RootState } from '../../../store/store.ts';
 
 function useDebounce(value: string, delay: number) {
   const [debouncedValue, setDebouncedValue] = useState(value);

@@ -1,5 +1,5 @@
-import InputField from '../InputField/InputField.tsx';
-import FormButton from '../FormButton/FormButton.tsx';
+import InputField from '../form/InputField/InputField.tsx';
+import FormButton from '../form/FormButton/FormButton.tsx';
 import './auth-form.scss';
 import { Link } from 'react-router-dom';
 import { IFormField } from '../SignUpForm/SignUpForm.tsx';

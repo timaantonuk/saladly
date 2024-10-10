@@ -1,4 +1,4 @@
-import footerLogo from '../../assets/footer-logo.png';
+import footerLogo from '../../../assets/footer-logo.png';
 import './footer.scss';
 import { Link } from 'react-router-dom';
 import { useEffect } from 'react';

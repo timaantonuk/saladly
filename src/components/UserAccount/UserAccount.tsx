@@ -54,7 +54,15 @@ function UserAccount() {
           <h3 className="user-account__heading">
             Welcome {userDetails.firstName}
           </h3>
-          <p>email - {userDetails.email}</p>
+          <p>Account details</p>
+          <div className="user-account__row">
+            <p>Email</p>
+            <span>{userDetails.email}</span>
+          </div>
+          <div className="user-account__row">
+            <p>First name</p>
+            <span>{userDetails.firstName}</span>
+          </div>
           <img src={userDetails.avatar} alt="your avatar" />
           <button onClick={handleLogout}>Logout</button>
         </>

@@ -6,7 +6,7 @@ import {
 } from '../../store/slices/saladSlice/saladSlice.ts';
 import { useEffect, useState } from 'react';
 
-interface Ifilter {
+interface IFilter {
   name: string;
   selected: boolean;
   filterKey: string;
@@ -25,7 +25,7 @@ function FiltersAndSorting() {
 
   const [selectedOption, setSelectedOption] = useState('');
 
-  function handleFilterClick(filter: Ifilter, index: number) {
+  function handleFilterClick(filter: IFilter, index: number) {
     setFilters((prevFilters) =>
       prevFilters.map((el, i) => ({
         ...el,
