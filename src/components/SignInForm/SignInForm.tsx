@@ -10,6 +10,8 @@ import { setDoc, getDoc, doc } from 'firebase/firestore';
 import { IFormField } from '../SignUpForm/SignUpForm.tsx';
 import { FcGoogle } from 'react-icons/fc';
 import { CustomFirebaseError } from '../../types.ts';
+import { setUserT } from '../../store/slices/userSlice/userSlice.ts';
+import { useDispatch } from 'react-redux';
 
 function SignInForm() {
   // Типизация состояния пользователя
@@ -18,11 +20,24 @@ function SignInForm() {
     pass: '',
   });
 
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const handleLogin = async () => {
     try {
       await signInWithEmailAndPassword(auth, user.email, user.pass);
+      const userPerson = auth.currentUser;
+
+      dispatch(
+        setUserT({
+          name: userPerson?.displayName,
+          email: userPerson?.email,
+          avatar: '',
+        }),
+      );
+
+      console.log(userPerson);
+
       console.log('user login success');
       toast.success('Successfully logged in!', {
         position: 'top-center',
@@ -62,6 +77,14 @@ function SignInForm() {
             firstName: user.displayName,
             avatar: user.photoURL,
           });
+
+          dispatch(
+            setUserT({
+              name: user.displayName,
+              email: user.email,
+              avatar: user.photoURL,
+            }),
+          );
         }
         toast.success('Successfully logged in!', {
           position: 'top-center',

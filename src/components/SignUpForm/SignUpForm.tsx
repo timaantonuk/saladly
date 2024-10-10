@@ -14,6 +14,8 @@ import { setDoc, doc } from 'firebase/firestore';
 import { toast } from 'react-toastify';
 import { FcGoogle } from 'react-icons/fc';
 import { CustomFirebaseError } from '../../types.ts';
+import { useDispatch } from 'react-redux';
+import { setUserT } from '../../store/slices/userSlice/userSlice.ts';
 
 export interface IFormField {
   type: 'text' | 'email' | 'password'; // допустимые типы input
@@ -22,7 +24,11 @@ export interface IFormField {
   onChange: (value: string) => void; // функция, принимающая новое значение
 }
 
+// TODO SAVE USER DETAILS IN LOCAL STORAGE SIGN IN SIGN UP
+
 function SignUpForm() {
+  const dispatch = useDispatch();
+
   const [user, setUser] = useState({
     name: '',
     email: '',
@@ -43,6 +49,14 @@ function SignUpForm() {
           email: userPerson.email,
           firstName: user.name,
         });
+
+        dispatch(
+          setUserT({
+            name: user.name,
+            email: userPerson?.email,
+            avatar: '',
+          }),
+        );
       }
 
       console.log('User registered successfully');
@@ -76,6 +90,15 @@ function SignUpForm() {
           firstName: user.displayName,
           avatar: user.photoURL,
         });
+
+        dispatch(
+          setUserT({
+            name: user.displayName,
+            email: user.email,
+            avatar: user.photoURL,
+          }),
+        );
+
         console.log('User data saved successfully.');
         console.log(user.photoURL);
         toast.success('Successfully registered!', {

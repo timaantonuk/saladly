@@ -31,6 +31,7 @@ function Header() {
   const [searchValue, setSearchValue] = useState('');
 
   const cartItems = useSelector((state: RootState) => state.cart.cartItems);
+  const userState = useSelector((state: RootState) => state.user);
   const dispatch = useDispatch();
 
   const debouncedSearchValue = useDebounce(searchValue, 500);
@@ -96,7 +97,7 @@ function Header() {
         />
 
         <div className="header__buttons">
-          <Link to="/sign-in">
+          <Link to={userState.email.length > 0 ? '/account' : '/sign-up'}>
             <button className="header__login-button" type="button">
               <span className="header__login-text">Account</span>{' '}
               <RxDividerVertical />{' '}

@@ -6,6 +6,12 @@ export interface CustomFirebaseError extends FirebaseError {
   };
 }
 
+export interface IUserState {
+  name: string;
+  email: string;
+  avatar: string;
+}
+
 export interface ICartItem {
   name: string;
   price: number;

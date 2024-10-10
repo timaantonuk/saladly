@@ -3,6 +3,7 @@ import CartItem from '../CartItem/CartItem.tsx';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../store/store.ts';
 import { calculateTotal, calculateItem } from '../../utilFunctions.ts';
+import { FaCartPlus } from 'react-icons/fa';
 
 function Cart() {
   const cartItems = useSelector((state: RootState) => state.cart.cartItems);
@@ -14,31 +15,46 @@ function Cart() {
 
         <div className="cart__wrapper">
           <div className="cart__items-container">
-            {cartItems.map((item) => (
-              <CartItem key={item.name} {...item} />
-            ))}
+            {cartItems.length > 0 ? (
+              cartItems.map((item) => <CartItem key={item.name} {...item} />)
+            ) : (
+              <div className="cart__empty">
+                <button className="cart__cart-icon">
+                  <FaCartPlus style={{ height: '200px', width: '200px' }} />
+                </button>
+                <p className="cart__warning">
+                  No items. Add at least one item to cart.
+                </p>
+              </div>
+            )}
           </div>
           <aside className="cart__recipt">
             <div className="cart__recipt__header">
               <span className="cart__recipt__header__decorative"></span>
-              <span>ВАШ ЧЕК</span>
+              <span>YOUR CHECK</span>
               <span className="cart__recipt__header__decorative"></span>
             </div>
 
             <div className="cart__recipt__body">
-              {cartItems.map((item) => (
-                <div key={item.name} className="cart__recipt__body__item">
-                  <span className="cart__recipt__body__item-name">
-                    {item.name}
-                  </span>
-                  <span className="cart__recipt__body__item-qty">
-                    X {item.quantity}
-                  </span>
-                  <span className="cart__recipt__body__item-price">
-                    {calculateItem(item.price, item.quantity)} $
-                  </span>
-                </div>
-              ))}
+              {cartItems.length > 0 ? (
+                cartItems.map((item) => (
+                  <div key={item.name} className="cart__recipt__body__item">
+                    <span className="cart__recipt__body__item-name">
+                      {item.name}
+                    </span>
+                    <span className="cart__recipt__body__item-qty">
+                      X {item.quantity}
+                    </span>
+                    <span className="cart__recipt__body__item-price">
+                      {calculateItem(item.price, item.quantity)} $
+                    </span>
+                  </div>
+                ))
+              ) : (
+                <p className="cart__recipt__no-items">
+                  Add at least one item to cart.
+                </p>
+              )}
             </div>
 
             <div className="cart__recipt__footer">

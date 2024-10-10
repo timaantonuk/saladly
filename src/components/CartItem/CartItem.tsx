@@ -23,12 +23,12 @@ function CartItem({ name, price, imageUrl, quantity, portion }: ICartItem) {
         </div>
       </div>
 
-      <div className="cart-item__prices">
-        <p className="cart-item__prices__price">
-          Price for item -{' '}
-          <span className="cart-item__prices__price__span">{price}$</span>
-        </p>
-      </div>
+      {/*<div className="cart-item__prices">*/}
+      {/*  <p className="cart-item__prices__price">*/}
+      {/*    Price for item -{' '}*/}
+      {/*    <span className="cart-item__prices__price__span">{price}$</span>*/}
+      {/*  </p>*/}
+      {/*</div>*/}
 
       <button className="cart-item__close-btn">
         <IoCloseSharp style={{ width: '20px', height: '20px' }} />

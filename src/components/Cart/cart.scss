@@ -7,7 +7,26 @@
   //min-height: 100vh;
   display: flex;
   flex-direction: column;
+  gap: 2rem;
 
+
+  &__empty {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 2rem
+  }
+
+  &__cart-icon {
+
+  }
+
+  &__warning {
+    font-size: 2rem;
+    font-family: "Proxima Nova Bold", sans-serif;
+    text-align: center;
+  }
 
   &__title {
     @include title;
@@ -72,6 +91,10 @@
         font-weight: bold;
         padding-bottom: 10px;
 
+      }
+      
+      &__no-items {
+        text-align: center;
       }
 
       &__body {

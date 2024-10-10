@@ -4,14 +4,19 @@
 .cart-item {
   color: $text-color-light;
   background-color: $accent-light;
-  display: flex;
+  //display: flex;
   padding-block: 1rem;
-  align-items: center;
-  gap: 2rem;
+  display: grid;
+  grid-template-columns: 0.7fr 2fr 0.5fr;
+  //align-items: center;
+  //justify-items: center;
+  gap: 0.5rem;
   border-radius: 2rem;
 
   @include mobile {
-    //flex-direction: column;
+
+    grid-template: 1fr 1fr / 1fr;
+    place-items: center;
     gap: 1rem;
 
     align-items: center;
@@ -126,6 +131,8 @@
 
   &__close-btn {
     @include transparent-btn;
+    justify-self: center;
+    align-self: center;
     padding: 1rem;
 
     &:hover {

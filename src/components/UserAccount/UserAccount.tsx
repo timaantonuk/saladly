@@ -3,6 +3,8 @@ import { auth, db } from '../../firebase/firebase.ts';
 import { doc, getDoc } from 'firebase/firestore';
 import { useNavigate } from 'react-router-dom';
 import './user-account.scss';
+import { useDispatch } from 'react-redux';
+import { removeUser } from '../../store/slices/userSlice/userSlice.ts';
 
 // Интерфейс для данных пользователя
 interface IUserDetails {
@@ -14,6 +16,7 @@ interface IUserDetails {
 function UserAccount() {
   const [userDetails, setUserDetails] = useState<IUserDetails | null>(null); // Указываем, что состояние может быть либо объектом IUserDetails, либо null
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const fetchUserData = async (): Promise<void> => {
     auth.onAuthStateChanged(async (user) => {
@@ -40,6 +43,7 @@ function UserAccount() {
   const handleLogout = async (): Promise<void> => {
     try {
       await auth.signOut();
+      dispatch(removeUser());
       navigate('/');
       console.log('User logged out successfully');
     } catch (error) {

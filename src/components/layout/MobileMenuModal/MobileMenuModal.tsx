@@ -1,6 +1,8 @@
 import './mobile-menu-modal.scss';
 import { IoCartSharp, IoPersonCircleSharp } from 'react-icons/io5';
 import { Link, useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../../store/store.ts';
 
 interface IMobileMenuModalProps {
   isOpen: boolean;
@@ -12,6 +14,7 @@ function MobileMenuModal({
   handleMobileModalOpen,
 }: IMobileMenuModalProps) {
   const navigate = useNavigate();
+  const userState = useSelector((state: RootState) => state.user);
 
   function handleGoToCart() {
     handleMobileModalOpen(); // Закрываем модальное окно
@@ -27,7 +30,7 @@ function MobileMenuModal({
       }
     >
       <ul className="mobile-menu-modal__list">
-        <Link to="/sign-in">
+        <Link to={userState.email.length > 0 ? '/account' : '/sign-up'}>
           <button
             className="mobile-menu-modal__item"
             onClick={handleMobileModalOpen}
