@@ -3,15 +3,22 @@ import FormButton from '../form/FormButton/FormButton.tsx';
 import './auth-form.scss';
 import { Link } from 'react-router-dom';
 import { IFormField } from '../SignUpForm/SignUpForm.tsx';
+import { FormState } from 'react-hook-form';
 
 interface IAuthProps {
   title: string;
   fields: IFormField[];
   buttonText: string;
-  onSubmit: (formData: object) => void;
+  onSubmit: () => void;
   linkPath: string;
   linkText: string;
   spanText: string;
+  formState: FormState<{
+    name: string;
+    email: string;
+    password: string;
+    confirmPassword: string;
+  }>;
 }
 
 function AuthForm({
@@ -22,38 +29,26 @@ function AuthForm({
   linkText,
   linkPath,
   spanText,
+  formState,
 }: IAuthProps) {
   const handleSubmit = (e: { preventDefault: () => void }) => {
     e.preventDefault();
-
-    const formData = fields.reduce(
-      (
-        acc: { email: string; password: string; name: string },
-        field: IFormField,
-      ) => {
-        if (field.type === 'email') acc.email = field.value;
-        if (field.type === 'password') acc.password = field.value;
-        if (field.type === 'text') acc.name = field.value;
-        return acc;
-      },
-      { email: '', password: '', name: '' },
-    );
-
-    onSubmit(formData);
+    onSubmit();
   };
+  const errors = formState.errors;
 
   return (
     <form className="auth-form">
       <h2 className="auth-form__title">{title}</h2>
 
-      {fields.map((field: IFormField, index) => (
-        <InputField
-          key={index}
-          type={field.type}
-          placeholder={field.placeholder}
-          value={field.value}
-          onChange={field.onChange}
-        />
+      {fields.map((formFieldProps: IFormField, index: number) => (
+        <>
+          <InputField
+            error={errors?.[formFieldProps?.name as never]}
+            key={index}
+            {...formFieldProps}
+          />
+        </>
       ))}
 
       <FormButton text={buttonText} onClick={handleSubmit} />

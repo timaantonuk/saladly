@@ -1,22 +1,35 @@
+import React from 'react';
 import './input-field.scss';
 
-interface InputFieldProps {
-  type: 'text' | 'email' | 'password'; // Узкий тип для полей ввода
-  placeholder: string;
-  value: string;
-  onChange: (value: string) => void; // Функция onChange принимает строковое значение
+interface InputFieldProps extends React.InputHTMLAttributes<HTMLInputElement> {
+  error:
+    | {
+        message: string;
+        type: string;
+      }
+    | undefined;
 }
 
-function InputField({ type, placeholder, value, onChange }: InputFieldProps) {
-  return (
-    <input
-      type={type}
-      className="input"
-      placeholder={placeholder}
-      value={value}
-      onChange={(e) => onChange(e.target.value)} // Передаем значение напрямую
-    />
-  );
-}
+const InputField = React.forwardRef<HTMLInputElement, InputFieldProps>(
+  ({ type, placeholder, error, ...rest }, ref) => {
+    console.log(error, 'in the input');
+    return (
+      <div className="input__wrapper">
+        <input
+          ref={ref}
+          type={type}
+          className={'input' + (error ? ' input--error' : ' ')}
+          placeholder={placeholder}
+          {...rest}
+        />
+        {error && (
+          <span className={'input-field__error-text'}>{error.message}</span>
+        )}
+      </div>
+    );
+  },
+);
+
+InputField.displayName = 'InputField';
 
 export default InputField;

@@ -4,13 +4,36 @@
 .input {
   width: 100%;
   padding: $spacing-unit;
-  margin-bottom: $spacing-unit;
   border: 1px solid $input-border-color;
   border-radius: $border-radius;
   font-size: $font-size-base;
 
-  &:focus, &:active {
-    border: 1px solid $input-border-color;
-
+  &__wrapper {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: $spacing-unit;
   }
+
+  &:focus,
+  &:active {
+    border: 1px solid $input-border-color;
+  }
+
+  &--error {
+    border-color: $error-color;
+
+    // Переопределяем цвет фокуса и активного состояния для поля с ошибкой
+    &:focus,
+    &:active {
+      border-color: $error-color;
+    }
+  }
+
+}
+
+.input-field__error-text {
+  color: $error-color;
+  text-align: left;
+  margin-top: 0.5rem;
 }

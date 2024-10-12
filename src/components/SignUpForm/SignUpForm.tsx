@@ -1,7 +1,6 @@
 import './sign-up-form.scss';
 import formLogo from '../../assets/footer-logo.png';
 import { Link } from 'react-router-dom';
-import { useState } from 'react';
 import {
   createUserWithEmailAndPassword,
   signInWithPopup,
@@ -16,12 +15,22 @@ import { FcGoogle } from 'react-icons/fc';
 import { CustomFirebaseError } from '../../types.ts';
 import { useDispatch } from 'react-redux';
 import { setUserT } from '../../store/slices/userSlice/userSlice.ts';
+import { ChangeHandler, RefCallBack, useForm } from 'react-hook-form';
 
 export interface IFormField {
-  type: 'text' | 'email' | 'password'; // допустимые типы input
+  onChange: ChangeHandler;
+  onBlur: ChangeHandler;
+  ref: RefCallBack;
+  name: string;
+  min?: string | number;
+  max?: string | number;
+  maxLength?: number;
+  minLength?: number;
+  pattern?: string;
+  required?: boolean;
+  disabled?: boolean;
+  type: string;
   placeholder: string;
-  value: string;
-  onChange: (value: string) => void; // функция, принимающая новое значение
 }
 
 // TODO SAVE USER DETAILS IN LOCAL STORAGE SIGN IN SIGN UP
@@ -29,30 +38,37 @@ export interface IFormField {
 function SignUpForm() {
   const dispatch = useDispatch();
 
-  const [user, setUser] = useState({
-    name: '',
-    email: '',
-    pass: '',
-    confirmPass: '',
-  });
-
   const navigate = useNavigate();
+  const { register, handleSubmit, getValues, formState } = useForm<{
+    name: string;
+    email: string;
+    password: string;
+    confirmPassword: string;
+  }>();
+  console.log(getValues(), formState.errors);
 
-  const handleRegister = async () => {
+  const handleRegister = async (data: {
+    name: string;
+    email: string;
+    password: string;
+    confirmPassword: string;
+  }) => {
     try {
-      await createUserWithEmailAndPassword(auth, user.email, user.pass);
+      const { name, email, password, confirmPassword } = getValues();
+      console.log(name, email, password, confirmPassword);
+      await createUserWithEmailAndPassword(auth, data.email, data.password);
       const userPerson = auth.currentUser;
       console.log(userPerson);
 
       if (userPerson) {
         await setDoc(doc(db, 'Users', userPerson.uid), {
           email: userPerson.email,
-          firstName: user.name,
+          firstName: data.name,
         });
 
         dispatch(
           setUserT({
-            name: user.name,
+            name: data.name,
             email: userPerson?.email,
             avatar: '',
           }),
@@ -63,6 +79,7 @@ function SignUpForm() {
       toast.success('Successfully registered!', {
         position: 'top-center',
       });
+      navigate('/account');
     } catch (error) {
       const err = error as Error;
       console.error(err.message);
@@ -70,7 +87,6 @@ function SignUpForm() {
         position: 'bottom-center',
       });
     }
-    navigate('/account');
   };
 
   const handleRegisterWithGoogle = async () => {
@@ -121,36 +137,45 @@ function SignUpForm() {
     navigate('/account');
   };
 
-  const fields: IFormField[] = [
+  const fields = [
     {
       type: 'text',
       placeholder: 'Full Name',
-      value: user.name,
-      onChange: (value) =>
-        setUser((prevState) => ({ ...prevState, name: value })), // Обновлено
+      ...register('name', { required: 'Name is required' }),
     },
     {
       type: 'email',
       placeholder: 'Email',
-      value: user.email,
-      onChange: (value) =>
-        setUser((prevState) => ({ ...prevState, email: value })), // Обновлено
+      ...register('email', {
+        required: 'Email is required',
+        pattern: {
+          value: /\S+@\S+\.\S+/,
+          message: 'Invalid email address',
+        },
+      }),
     },
     {
       type: 'password',
       placeholder: 'Password',
-      value: user.pass,
-      onChange: (value) =>
-        setUser((prevState) => ({ ...prevState, pass: value })), // Обновлено
+      ...register('password', {
+        required: 'Password is required',
+        minLength: {
+          value: 6,
+          message: 'Password must be at least 6 characters',
+        },
+      }),
     },
     {
       type: 'password',
       placeholder: 'Confirm Password',
-      value: user.confirmPass,
-      onChange: (value) =>
-        setUser((prevState) => ({ ...prevState, confirmPass: value })), // Обновлено
+      ...register('confirmPassword', {
+        required: 'Please confirm your password',
+        validate: (value) =>
+          value === getValues('password') || 'Passwords do not match',
+      }),
     },
   ];
+  console.log(fields);
 
   return (
     <div className="signup">
@@ -171,10 +196,13 @@ function SignUpForm() {
             title="Sign Up"
             fields={fields}
             buttonText="Sign Up"
-            onSubmit={handleRegister}
+            onSubmit={handleSubmit(handleRegister, () =>
+              alert('Suck cock, no salad, brother'),
+            )}
             linkText="Already have an account?"
             linkPath="/sign-in"
             spanText="Sign in."
+            formState={formState}
           />
         </div>
 

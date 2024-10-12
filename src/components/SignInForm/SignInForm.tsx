@@ -1,7 +1,6 @@
 import './sign-in-form.scss';
 import formLogo from '../../assets/footer-logo.png';
 import { Link, useNavigate } from 'react-router-dom';
-import { useState } from 'react';
 import { signInWithEmailAndPassword, signInWithPopup } from 'firebase/auth';
 import AuthForm from '../AuthForm/AuthForm.tsx';
 import { auth, db, provider } from '../../firebase/firebase';
@@ -12,20 +11,23 @@ import { FcGoogle } from 'react-icons/fc';
 import { CustomFirebaseError } from '../../types.ts';
 import { setUserT } from '../../store/slices/userSlice/userSlice.ts';
 import { useDispatch } from 'react-redux';
+import { useForm } from 'react-hook-form';
 
 function SignInForm() {
-  // Типизация состояния пользователя
-  const [user, setUser] = useState<{ email: string; pass: string }>({
-    email: '',
-    pass: '',
-  });
-
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { register, handleSubmit, getValues, formState } = useForm<{
+    email: string;
+    password: string;
+  }>();
 
   const handleLogin = async () => {
     try {
-      await signInWithEmailAndPassword(auth, user.email, user.pass);
+      await signInWithEmailAndPassword(
+        auth,
+        getValues().email,
+        getValues().password,
+      );
       const userPerson = auth.currentUser;
 
       dispatch(
@@ -111,16 +113,24 @@ function SignInForm() {
     {
       type: 'email',
       placeholder: 'Email',
-      value: user.email,
-      onChange: (value: string) =>
-        setUser((prevState) => ({ ...prevState, email: value })),
+      ...register('email', {
+        required: 'Email is required',
+        pattern: {
+          value: /\S+@\S+\.\S+/,
+          message: 'Invalid email address',
+        },
+      }),
     },
     {
       type: 'password',
       placeholder: 'Password',
-      value: user.pass,
-      onChange: (value: string) =>
-        setUser((prevState) => ({ ...prevState, pass: value })),
+      ...register('password', {
+        required: 'Password is required',
+        minLength: {
+          value: 6,
+          message: 'Password must be at least 6 characters',
+        },
+      }),
     },
   ];
 
@@ -144,10 +154,13 @@ function SignInForm() {
             title="Sign In"
             fields={fields}
             buttonText="Sign In"
-            onSubmit={handleLogin}
+            onSubmit={handleSubmit(handleLogin, () =>
+              alert('suck nuts brother, go to mcdonalds'),
+            )}
             linkText="Don't have an account?"
             linkPath="/sign-up"
             spanText="Sign up."
+            formState={formState}
           />
         </div>
 
