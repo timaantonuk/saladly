@@ -5,6 +5,8 @@ import { useNavigate } from 'react-router-dom';
 import './user-account.scss';
 import { useDispatch } from 'react-redux';
 import { removeUser } from '../../store/slices/userSlice/userSlice.ts';
+import { BiSolidUserCircle } from 'react-icons/bi';
+import { IoIosExit } from 'react-icons/io';
 
 // Интерфейс для данных пользователя
 interface IUserDetails {
@@ -55,20 +57,50 @@ function UserAccount() {
     <div className="user-account">
       {userDetails ? (
         <>
-          <h3 className="user-account__heading">
-            Welcome {userDetails.firstName}
-          </h3>
-          <p>Account details</p>
-          <div className="user-account__row">
-            <p>Email</p>
-            <span>{userDetails.email}</span>
+          <div className="user-account__welcome-wrapper">
+            <h3 className="user-account__heading">
+              Welcome {userDetails.firstName}
+            </h3>
+            {userDetails.avatar ? (
+              <img
+                src={userDetails.avatar}
+                className="user-account__avatar"
+                alt="Your profile photo"
+              />
+            ) : (
+              <BiSolidUserCircle
+                style={{
+                  width: '5rem',
+                  height: '5rem',
+                  color: '#52b788',
+                }}
+              />
+            )}
           </div>
-          <div className="user-account__row">
-            <p>First name</p>
-            <span>{userDetails.firstName}</span>
+
+          {/*<p className="user-account__email">{userDetails.email}</p>*/}
+
+          <div className="user-account__control-panel">
+            <div className="user-account__orders">
+              <h2 className="user-account__subtitle">Your orders:</h2>
+
+              <div className="user-account__order">
+                <p>10/12/2024 - Total: 77.84$</p>
+                <p>2x Caesar Salad, 1x Marino Salad, 1x Dijon Salad</p>
+              </div>
+            </div>
+            <div className="user-account__discounts">
+              <h2 className="user-account__subtitle">Your discounts:</h2>
+
+              <div className="user-account__promos">
+                <p>Promo code -10%: SALAD2024</p>
+              </div>
+            </div>
           </div>
-          <img src={userDetails.avatar} alt="your avatar" />
-          <button onClick={handleLogout}>Logout</button>
+
+          <button className="user-account__logout-btn" onClick={handleLogout}>
+            Logout from {userDetails.email} <IoIosExit />
+          </button>
         </>
       ) : (
         <p>Loading...</p>
