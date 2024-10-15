@@ -196,9 +196,7 @@ function SignUpForm() {
             title="Sign Up"
             fields={fields}
             buttonText="Sign Up"
-            onSubmit={handleSubmit(handleRegister, () =>
-              alert('Suck cock, no salad, brother'),
-            )}
+            onSubmit={handleSubmit(handleRegister)}
             linkText="Already have an account?"
             linkPath="/sign-in"
             spanText="Sign in."

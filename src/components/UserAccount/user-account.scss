@@ -27,11 +27,17 @@
     }
   }
 
+  &__email {
+    margin-top: 1rem;
+    text-align: center;
+  }
+
   &__heading {
     @include title;
 
     @include mobile {
-      font-size: 2rem;
+      font-size: 1.5rem;
+      margin-bottom: 2rem;
     }
   }
 

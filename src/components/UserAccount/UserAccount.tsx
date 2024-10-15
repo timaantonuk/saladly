@@ -54,31 +54,32 @@ function UserAccount() {
   };
 
   return (
-    <div className="user-account">
+    <section className="user-account">
       {userDetails ? (
         <>
-          <div className="user-account__welcome-wrapper">
-            <h3 className="user-account__heading">
-              Welcome {userDetails.firstName}
-            </h3>
-            {userDetails.avatar ? (
-              <img
-                src={userDetails.avatar}
-                className="user-account__avatar"
-                alt="Your profile photo"
-              />
-            ) : (
-              <BiSolidUserCircle
-                style={{
-                  width: '5rem',
-                  height: '5rem',
-                  color: '#52b788',
-                }}
-              />
-            )}
+          <div className="wrapper">
+            <div className="user-account__welcome-wrapper">
+              <h3 className="user-account__heading">
+                Welcome {userDetails.firstName}
+              </h3>
+              {userDetails.avatar ? (
+                <img
+                  src={userDetails.avatar}
+                  className="user-account__avatar"
+                  alt="Your profile photo"
+                />
+              ) : (
+                <BiSolidUserCircle
+                  style={{
+                    width: '5rem',
+                    height: '5rem',
+                    color: '#52b788',
+                  }}
+                />
+              )}
+            </div>
+            <p className="user-account__email">{userDetails.email}</p>
           </div>
-
-          {/*<p className="user-account__email">{userDetails.email}</p>*/}
 
           <div className="user-account__control-panel">
             <div className="user-account__orders">
@@ -99,13 +100,13 @@ function UserAccount() {
           </div>
 
           <button className="user-account__logout-btn" onClick={handleLogout}>
-            Logout from {userDetails.email} <IoIosExit />
+            Logout <IoIosExit />
           </button>
         </>
       ) : (
         <p>Loading...</p>
       )}
-    </div>
+    </section>
   );
 }
 
