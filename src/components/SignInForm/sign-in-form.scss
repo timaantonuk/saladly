@@ -87,6 +87,10 @@
   &__socials {
    @include socials;
 
+    @include mobile {
+      width: 100%;
+    }
+
     &-icons {
       @include flex-center;
 

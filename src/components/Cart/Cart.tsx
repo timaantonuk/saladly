@@ -20,7 +20,13 @@ function Cart() {
             ) : (
               <div className="cart__empty">
                 <button className="cart__cart-icon">
-                  <FaCartPlus style={{ height: '200px', width: '200px' }} />
+                  <FaCartPlus
+                    style={{
+                      height: '200px',
+                      width: '200px',
+                      color: '#21332d',
+                    }}
+                  />
                 </button>
                 <p className="cart__warning">
                   No items. Add at least one item to cart.
