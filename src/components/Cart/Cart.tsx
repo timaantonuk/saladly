@@ -4,9 +4,16 @@ import { useSelector } from 'react-redux';
 import { RootState } from '../../store/store.ts';
 import { calculateTotal, calculateItem } from '../../utilFunctions.ts';
 import { FaCartPlus } from 'react-icons/fa';
+import { useNavigate } from 'react-router-dom';
 
 function Cart() {
   const cartItems = useSelector((state: RootState) => state.cart.cartItems);
+
+  const navigate = useNavigate();
+
+  function handleOrderClick() {
+    navigate('/order');
+  }
 
   return (
     <>
@@ -70,7 +77,9 @@ function Cart() {
               </span>
             </div>
 
-            <button className="cart__recipt__button">Place Order</button>
+            <button className="cart__recipt__button" onClick={handleOrderClick}>
+              Place Order
+            </button>
           </aside>
         </div>
       </section>
