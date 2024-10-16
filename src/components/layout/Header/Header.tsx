@@ -50,7 +50,7 @@ function Header() {
 
   return (
     <>
-      <header className="header">
+      <header className="header" id="page-top">
         <div className="header__controls">
           <Link to="/">
             <img className="header__logo-img" src={logo} alt="Saladly logo" />
