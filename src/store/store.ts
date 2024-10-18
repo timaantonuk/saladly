@@ -44,8 +44,6 @@ const saveUserToLocalStorage = (state: IUserState) => {
   }
 };
 
-//TODO CHANGE ROUTES IF USER LOGGED IN
-
 const loadCartFromLocalStorage = () => {
   try {
     const serializedState = localStorage.getItem('cart');

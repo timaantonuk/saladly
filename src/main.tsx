@@ -8,12 +8,20 @@ import { Provider } from 'react-redux';
 import './firebase/firebase.ts';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { loadStripe } from '@stripe/stripe-js';
+import { Elements } from '@stripe/react-stripe-js';
+
+const stripePromise = loadStripe(
+  'pk_test_51QBNUsG0d1bAuJaVUPS0XGnNLd8Y01LieXrbjm6e2V56F1SEDBmPeFEzEf5ESDcbBJWBd59fkZwrlUiKO30PolNh00urwGBQH1',
+); // Replace with your actual publishable key
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <Provider store={store}>
-      <RouterProvider router={router} />
-      <ToastContainer />
-    </Provider>
+    <Elements stripe={stripePromise}>
+      <Provider store={store}>
+        <RouterProvider router={router} />
+        <ToastContainer />
+      </Provider>
+    </Elements>
   </StrictMode>,
 );

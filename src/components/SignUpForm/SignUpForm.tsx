@@ -71,6 +71,7 @@ function SignUpForm() {
             name: data.name,
             email: userPerson?.email,
             avatar: '',
+            id: userPerson.uid,
           }),
         );
       }
@@ -112,6 +113,7 @@ function SignUpForm() {
             name: user.displayName,
             email: user.email,
             avatar: user.photoURL,
+            id: user.uid,
           }),
         );
 

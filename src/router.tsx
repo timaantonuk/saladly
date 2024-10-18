@@ -6,6 +6,7 @@ import SignUpFormRoute from './routes/SignUpFormRoute.tsx';
 import SignInFormRoute from './routes/SignInFormRoute.tsx';
 import UserAccountRoute from './routes/UserAccountRoute.tsx';
 import OrderFormRoute from './routes/OrderFormRoute.tsx';
+import PaymentRoute from './routes/PaymentRoute.tsx';
 
 export const router = createBrowserRouter([
   { path: '/', element: <App />, errorElement: <ErrorPageRoute /> },
@@ -14,4 +15,5 @@ export const router = createBrowserRouter([
   { path: '/sign-in', element: <SignInFormRoute /> },
   { path: '/account', element: <UserAccountRoute /> },
   { path: '/order', element: <OrderFormRoute /> },
+  { path: '/payment', element: <PaymentRoute /> },
 ]);

@@ -7,18 +7,50 @@ import { useDispatch } from 'react-redux';
 import { removeUser } from '../../store/slices/userSlice/userSlice.ts';
 import { BiSolidUserCircle } from 'react-icons/bi';
 import { IoIosExit } from 'react-icons/io';
+import { convertTimestampToDate } from '../../utilFunctions.ts';
+import { FaBowlFood, FaHouseUser, FaSackDollar } from 'react-icons/fa6';
+import { MdAccessTimeFilled } from 'react-icons/md';
+
+interface Cart {
+  [orderId: string]: IOrder; // Orders indexed by order ID
+}
 
 // Интерфейс для данных пользователя
 interface IUserDetails {
+  cart: Cart;
   firstName: string;
   email: string;
   avatar: string;
+  id: string;
+}
+
+interface CartItem {
+  quantity: number; // Quantity of the item
+  portion: string; // Portion size (e.g., "big", "medium")
+  imageUrl: string; // URL of the item's image
+  name: string; // Name of the item
+  price: number; // Price of the item
+}
+
+interface IOrder {
+  email: string; // Email of the user
+  name: string; // Name of the user
+  address: string; // Delivery address
+  promocode: string; // Promo code applied
+  cartItems: CartItem[]; // Array of cart items
+  totalPrice: string; // Total price of the order (as a string)
+  timestamp: {
+    seconds: number; // Timestamp seconds
+    nanoseconds: number; // Timestamp nanoseconds
+  };
 }
 
 function UserAccount() {
   const [userDetails, setUserDetails] = useState<IUserDetails | null>(null); // Указываем, что состояние может быть либо объектом IUserDetails, либо null
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  // const userId = useSelector((state: RootState) => state.user.id);
 
   const fetchUserData = async (): Promise<void> => {
     auth.onAuthStateChanged(async (user) => {
@@ -85,10 +117,39 @@ function UserAccount() {
             <div className="user-account__orders">
               <h2 className="user-account__subtitle">Your orders:</h2>
 
-              <div className="user-account__order">
-                <p>10/12/2024 - Total: 77.84$</p>
-                <p>2x Caesar Salad, 1x Marino Salad, 1x Dijon Salad</p>
-              </div>
+              {userDetails.cart &&
+              Object.values(userDetails.cart).length > 0 ? (
+                Object.values(userDetails.cart).map((order: IOrder) => {
+                  return (
+                    <div
+                      className="user-account__order"
+                      key={order.timestamp.seconds}
+                    >
+                      <p>
+                        <FaBowlFood className="user-account__icon" />{' '}
+                        {order.cartItems
+                          .map((item) => `${item.name} X ${item.quantity}`)
+                          .join(', ')}
+                      </p>
+
+                      <p>
+                        <FaHouseUser className="user-account__icon" />{' '}
+                        {order.address}
+                      </p>
+                      <p>
+                        <FaSackDollar className="user-account__icon" />{' '}
+                        {order.totalPrice}$
+                      </p>
+                      <p>
+                        <MdAccessTimeFilled className="user-account__icon" />{' '}
+                        {convertTimestampToDate(order.timestamp.seconds)}
+                      </p>
+                    </div>
+                  );
+                })
+              ) : (
+                <p>No orders</p>
+              )}
             </div>
             <div className="user-account__discounts">
               <h2 className="user-account__subtitle">Your discounts:</h2>

@@ -5,6 +5,7 @@ const initialState: IUserState = {
   name: '',
   email: '',
   avatar: '',
+  id: '',
 };
 
 export const userSlice = createSlice({
@@ -15,11 +16,13 @@ export const userSlice = createSlice({
       state.name = action.payload.name;
       state.email = action.payload.email;
       state.avatar = action.payload.avatar;
+      state.id = action.payload.id;
     },
     removeUser: (state) => {
       state.name = '';
       state.email = '';
       state.avatar = '';
+      state.id = '';
     },
   },
 });

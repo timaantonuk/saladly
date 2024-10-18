@@ -35,6 +35,7 @@ function SignInForm() {
           name: userPerson?.displayName,
           email: userPerson?.email,
           avatar: '',
+          id: userPerson?.uid,
         }),
       );
 
@@ -85,6 +86,7 @@ function SignInForm() {
               name: user.displayName,
               email: user.email,
               avatar: user.photoURL,
+              id: user.uid,
             }),
           );
         }

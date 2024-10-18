@@ -1,6 +1,8 @@
 @import '../../styles/utils/variables';
 @import '../../styles/utils/mixins';
 
+
+
 .user-account {
   @include container;
   border-radius: 0;
@@ -32,6 +34,10 @@
     text-align: center;
   }
 
+  &__icon {
+    margin-right: 0.5rem;
+  }
+
   &__heading {
     @include title;
 
@@ -55,6 +61,9 @@
 
   &__logout-btn {
     @include button;
+    padding-inline: 4rem;
+    font-size: 1rem;
+    font-family: "Proxima Nova Bold", sans-serif;
   }
 
   &__control-panel {
@@ -92,12 +101,13 @@
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
-    align-items: center;
     padding-block: 1rem;
     padding-inline: 1rem;
     background-color: $accent-light;
     border-radius: 1rem;
-    text-align: center;
+    margin-bottom: 2rem;
+    width: 80%;
+    text-align: left;
   }
 
   &__discounts {

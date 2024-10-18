@@ -12,6 +12,9 @@ function Cart() {
   const navigate = useNavigate();
 
   function handleOrderClick() {
+    if (cartItems.length < 1) {
+      return;
+    }
     navigate('/order');
   }
 
