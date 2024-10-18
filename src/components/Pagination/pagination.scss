@@ -3,6 +3,7 @@
 
 .pagination {
   @include container;
+  padding-inline: 0;
   border-radius: 0;
 
   &__list {

@@ -5,7 +5,7 @@ import ErrorPageRoute from './routes/ErrorPageRoute.tsx';
 import SignUpFormRoute from './routes/SignUpFormRoute.tsx';
 import SignInFormRoute from './routes/SignInFormRoute.tsx';
 import UserAccountRoute from './routes/UserAccountRoute.tsx';
-import OrderFormRoute from './components/layout/Header/OrderFormRoute.tsx';
+import OrderFormRoute from './routes/OrderFormRoute.tsx';
 
 export const router = createBrowserRouter([
   { path: '/', element: <App />, errorElement: <ErrorPageRoute /> },
