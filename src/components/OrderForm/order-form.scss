@@ -1,0 +1,62 @@
+@import '../../styles/utils/mixins';
+@import '../../styles/utils/variables';
+
+
+.order-wrapper {
+  @include container;
+  display: flex;
+  width: 100%;
+}
+
+.order-data {
+  background: rebeccapurple;
+  padding: 1rem;
+  width: 50%;
+  border-bottom-left-radius: 2rem;
+  border-top-left-radius: 2rem;
+}
+
+.order-content {
+  background: royalblue;
+  width: 50%;
+  border-bottom-right-radius: 2rem;
+  border-top-right-radius: 2rem;
+}
+
+.order-form {
+
+  display: flex;
+  flex-direction: column;
+
+  &__input {
+    width: 100%;
+    padding: $spacing-unit;
+    border: 1px solid $input-border-color;
+    border-radius: $border-radius;
+    font-size: $font-size-base;
+
+    &:focus,
+    &:active {
+      border: 1px solid $input-border-color;
+    }
+
+    &--error {
+      border-color: $error-color;
+
+      &:focus,
+      &:active {
+        border-color: $error-color;
+      }
+  }
+
+
+}
+
+  &__button {
+    background: #b2a58c;
+    border: 1px solid black;
+  }
+}
+
+
+
