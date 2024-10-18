@@ -1,40 +1,69 @@
 import './pagination.scss';
 
-function Pagination() {
-  return (
-    <>
-      <nav className="pagination" aria-label="Pagination">
-        <ul className="pagination__list">
-          <li className="pagination__item">
-            <a className="pagination__link" href="#" aria-label="Previous">
-              &lt;
-            </a>
-          </li>
-          <li className="pagination__item">
-            <a className="pagination__link" href="#">
-              1
-            </a>
-          </li>
-          <li className="pagination__item">
-            <a className="pagination__link" href="#">
-              2
-            </a>
-          </li>
-          <li className="pagination__item">
-            <a className="pagination__link" href="#">
-              3
-            </a>
-          </li>
-          <li className="pagination__item">
-            <a className="pagination__link" href="#" aria-label="Next">
-              &gt;
-            </a>
-          </li>
-        </ul>
-      </nav>
+interface PaginationProps {
+  itemsPerPage: number;
+  totalItems: number;
+  paginate: (pageNumber: number) => void;
+  currentPage: number;
+}
 
-      {/*<div style={{ width: '100%', height: '80px' }}></div>*/}
-    </>
+function Pagination({
+  itemsPerPage,
+  totalItems,
+  paginate,
+  currentPage,
+}: PaginationProps) {
+  const pageNumbers = [];
+
+  // Вычисляем количество страниц
+  for (let i = 1; i <= Math.ceil(totalItems / itemsPerPage); i++) {
+    pageNumbers.push(i);
+  }
+
+  // Обработчик для изменения страницы
+  const handlePageChange = (newPage: number) => {
+    if (newPage >= 1 && newPage <= pageNumbers.length) {
+      paginate(newPage);
+    }
+  };
+
+  // console.log(currentPage);
+
+  return (
+    <nav className="pagination" aria-label="Pagination">
+      <ul className="pagination__list">
+        {/* Кнопка для перехода на предыдущую страницу */}
+        <li
+          className={`pagination__item ${currentPage === 1 ? 'disabled' : ''}`}
+          onClick={() => handlePageChange(currentPage - 1)}
+        >
+          <a href="#" className="pagination__link" aria-label="Previous">
+            &lt;
+          </a>
+        </li>
+
+        {/* Кнопки для каждой страницы */}
+        {pageNumbers.map((number) => (
+          <li
+            key={number}
+            onClick={() => handlePageChange(number)}
+            className={`pagination__item ${+currentPage === +number ? 'pagination__item pagination__item--active' : ''}`}
+          >
+            <a className="pagination__link">{number}</a>
+          </li>
+        ))}
+
+        {/* Кнопка для перехода на следующую страницу */}
+        <li
+          className={`pagination__item ${currentPage === pageNumbers.length ? 'disabled' : ''}`}
+          onClick={() => handlePageChange(currentPage + 1)}
+        >
+          <a href="#" className="pagination__link" aria-label="Next">
+            &gt;
+          </a>
+        </li>
+      </ul>
+    </nav>
   );
 }
 

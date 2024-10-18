@@ -7,7 +7,8 @@ export interface SaladState {
   originalSalads: Salad[];
   activeFilterKey: string;
   filteredSalads: Salad[];
-  currentSortKey: string; // Keep track of the current sort key
+  currentSortKey: string;
+  currentPage: number; // Добавляем текущую страницу
 }
 
 const initialState: SaladState = {
@@ -15,7 +16,8 @@ const initialState: SaladState = {
   originalSalads: [],
   activeFilterKey: 'all',
   filteredSalads: [],
-  currentSortKey: '', // Initialize with an empty string
+  currentSortKey: '',
+  currentPage: 1, // Инициализируем с первой страницы
 };
 
 export const saladSlice = createSlice({
@@ -25,17 +27,20 @@ export const saladSlice = createSlice({
     filterByType: (state, action: PayloadAction<string>) => {
       state.activeFilterKey = action.payload;
 
-      // If 'all' is selected, reset the filtered salads to original
+      // Если выбран 'all', сбрасываем отфильтрованные салаты на оригинальные
       if (action.payload === 'all') {
         state.filteredSalads = [...state.originalSalads];
       } else {
-        // Otherwise, filter based on the selected type
+        // Фильтруем по выбранному фильтру
         state.filteredSalads = state.originalSalads.filter((salad) =>
           salad.filters?.includes(action.payload),
         );
       }
 
-      // After filtering, reapply sorting if there's a current sort key
+      // После фильтрации сбрасываем текущую страницу на первую
+      state.currentPage = 1;
+
+      // После фильтрации повторно применяем сортировку, если она была
       if (state.currentSortKey) {
         state.filteredSalads = applySorting(
           state.filteredSalads,
@@ -43,7 +48,7 @@ export const saladSlice = createSlice({
         );
       }
 
-      // Update allSalads to match the newly filtered salads
+      // Обновляем allSalads
       state.allSalads = [...state.filteredSalads];
     },
     sortByType: (state, action: PayloadAction<string>) => {

@@ -9,10 +9,13 @@ import CatalogMagic from '../ContentLoader/CatalogMagic'; // Импортиру�
 
 function AllSalads() {
   const dispatch = useAppDispatch();
-  const salads = useSelector((state: RootState) => state.salad.allSalads);
+  const salads = useSelector((state: RootState) => state.salad.filteredSalads);
   const [loading, setLoading] = useState(true); // состояние загрузки
+  const [currentPage, setCurrentPage] = useState(1); // текущее состояние страницы
+  const itemsPerPage = 6; // количество салатов на страницу
 
   useEffect(() => {
+    // Fetch salads and update state
     dispatch(fetchSalads()).then(() => {
       // Добавляем искусственную задержку в 1 секунду
       setTimeout(() => {
@@ -20,6 +23,19 @@ function AllSalads() {
       }, 1000);
     });
   }, [dispatch]);
+
+  useEffect(() => {
+    // Сброс на первую страницу при изменении фильтра (изменении salads)
+    setCurrentPage(1);
+  }, [salads]); // Отслеживаем изменения отфильтрованных салатов
+
+  // Рассчитываем индексы для отображаемых салатов
+  const indexOfLastSalad = currentPage * itemsPerPage;
+  const indexOfFirstSalad = indexOfLastSalad - itemsPerPage;
+  const currentSalads = salads.slice(indexOfFirstSalad, indexOfLastSalad); // отображаем текущие салаты
+
+  // Функция для смены страницы
+  const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
 
   return (
     <main className="salads-menu">
@@ -30,11 +46,20 @@ function AllSalads() {
       ) : (
         <>
           <ul className="salads-menu__list">
-            {salads.map((salad) => (
-              <SaladCard key={salad.name} {...salad} />
-            ))}
+            {currentSalads.length > 0 ? (
+              currentSalads.map((salad) => (
+                <SaladCard key={salad.name} {...salad} />
+              ))
+            ) : (
+              <p>No salads match your filter.</p>
+            )}
           </ul>
-          <Pagination />
+          <Pagination
+            itemsPerPage={itemsPerPage}
+            totalItems={salads.length} // Отфильтрованные салаты
+            paginate={paginate}
+            currentPage={currentPage} // Передаём текущую страницу
+          />
         </>
       )}
     </main>

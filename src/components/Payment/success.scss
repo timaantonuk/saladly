@@ -1,0 +1,41 @@
+@import '../../styles/utils/variables';
+@import '../../styles/utils/mixins';
+
+.success {
+  @include container;
+  border-radius: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+
+  &__heading {
+    @include title;
+
+    @include mobile {
+      font-size: 1.5rem;
+    }
+  }
+
+  &__description {
+    font-size: $fz-normal;
+    margin-top: 1rem;
+
+    @include mobile {
+      margin-top: .5rem;
+    }
+  }
+
+  &__img {
+
+      clip-path: inset(10% 0 0 0); /* обрезает верхнюю часть на 20% */
+      width: 100%; /* или другая ширина */
+      height: auto; /* или заданная высота */
+      transform: translateY(-4rem);
+
+    @include mobile {
+      transform: translateY(-1rem);
+    }
+
+  }
+}
