@@ -3,7 +3,7 @@ import { auth, db } from '../../firebase/firebase.ts';
 import { doc, getDoc } from 'firebase/firestore';
 import { useNavigate } from 'react-router-dom';
 import './user-account.scss';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { removeUser } from '../../store/slices/userSlice/userSlice.ts';
 import { BiSolidUserCircle } from 'react-icons/bi';
 import { IoIosExit } from 'react-icons/io';
@@ -16,6 +16,7 @@ import {
 } from 'react-icons/fa6';
 import { MdAccessTimeFilled } from 'react-icons/md';
 import { IoNotifications } from 'react-icons/io5';
+import { RootState } from '../../store/store.ts';
 
 interface Cart {
   [orderId: string]: IOrder; // Orders indexed by order ID
@@ -52,11 +53,33 @@ interface IOrder {
 }
 
 function UserAccount() {
-  const [userDetails, setUserDetails] = useState<IUserDetails | null>(null); // Указываем, что состояние может быть либо объектом IUserDetails, либо null
+  const [userDetails, setUserDetails] = useState<IUserDetails | null>(null);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const userId = useSelector((state: RootState) => state.user.id);
 
-  // const userId = useSelector((state: RootState) => state.user.id);
+  const fetchUserOrders = async (userId: string): Promise<Cart | null> => {
+    if (!userId) {
+      console.log('User ID is not available');
+      return null;
+    }
+
+    try {
+      const docRef = doc(db, 'Users', userId);
+      const docSnap = await getDoc(docRef);
+
+      if (docSnap.exists()) {
+        const userData = docSnap.data() as IUserDetails;
+        return userData.cart || null;
+      } else {
+        console.log('User document does not exist.');
+        return null;
+      }
+    } catch (error) {
+      console.error('Error fetching user orders:', (error as Error).message);
+      return null;
+    }
+  };
 
   const fetchUserData = async (): Promise<void> => {
     auth.onAuthStateChanged(async (user) => {
@@ -64,7 +87,8 @@ function UserAccount() {
         const docRef = doc(db, 'Users', user.uid);
         const docSnap = await getDoc(docRef);
         if (docSnap.exists()) {
-          setUserDetails(docSnap.data() as IUserDetails); // Приведение типов
+          const userData = docSnap.data() as IUserDetails;
+          setUserDetails(userData);
         } else {
           console.log('User document does not exist.');
         }
@@ -78,7 +102,23 @@ function UserAccount() {
     fetchUserData();
   }, []);
 
-  console.log(userDetails);
+  useEffect(() => {
+    const fetchOrders = async () => {
+      const orders = await fetchUserOrders(userId);
+      if (orders) {
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-expect-error
+        setUserDetails((prevDetails) => ({
+          ...prevDetails,
+          cart: orders,
+        }));
+      }
+    };
+
+    if (userId) {
+      fetchOrders();
+    }
+  }, [userId]);
 
   const handleLogout = async (): Promise<void> => {
     try {
@@ -155,7 +195,6 @@ function UserAccount() {
                 })
               ) : (
                 <p className="user-account__no-orders">
-                  {' '}
                   <IoNotifications />
                   No orders
                 </p>
