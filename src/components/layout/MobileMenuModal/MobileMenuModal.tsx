@@ -21,6 +21,8 @@ function MobileMenuModal({
     navigate('/cart'); // Перенаправляем пользователя на страницу корзины
   }
 
+  console.log(userState);
+
   return (
     <div
       className={

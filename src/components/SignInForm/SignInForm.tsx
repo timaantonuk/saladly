@@ -72,6 +72,14 @@ function SignInForm() {
         if (userSnap.exists()) {
           // Пользователь уже есть в базе данных, можно получить его данные
           console.log('User data from database:', userSnap.data());
+          dispatch(
+            setUserT({
+              name: user.displayName,
+              email: user.email,
+              avatar: user.photoURL,
+              id: user.uid,
+            }),
+          );
         } else {
           // Если по какой-то причине пользователь не был добавлен ранее, можно добавить его сейчас
           console.log('User not found in database, consider adding user data.');
