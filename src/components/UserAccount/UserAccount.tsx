@@ -8,8 +8,14 @@ import { removeUser } from '../../store/slices/userSlice/userSlice.ts';
 import { BiSolidUserCircle } from 'react-icons/bi';
 import { IoIosExit } from 'react-icons/io';
 import { convertTimestampToDate } from '../../utilFunctions.ts';
-import { FaBowlFood, FaHouseUser, FaSackDollar } from 'react-icons/fa6';
+import {
+  FaBowlFood,
+  FaHouseUser,
+  FaMoneyBill1Wave,
+  FaSackDollar,
+} from 'react-icons/fa6';
 import { MdAccessTimeFilled } from 'react-icons/md';
+import { IoNotifications } from 'react-icons/io5';
 
 interface Cart {
   [orderId: string]: IOrder; // Orders indexed by order ID
@@ -125,7 +131,7 @@ function UserAccount() {
                       className="user-account__order"
                       key={order.timestamp.seconds}
                     >
-                      <p>
+                      <p className="user-account__order-info">
                         <FaBowlFood className="user-account__icon" />{' '}
                         {order.cartItems
                           .map((item) => `${item.name} X ${item.quantity}`)
@@ -148,14 +154,20 @@ function UserAccount() {
                   );
                 })
               ) : (
-                <p>No orders</p>
+                <p className="user-account__no-orders">
+                  {' '}
+                  <IoNotifications />
+                  No orders
+                </p>
               )}
             </div>
             <div className="user-account__discounts">
               <h2 className="user-account__subtitle">Your discounts:</h2>
 
               <div className="user-account__promos">
-                <p>Promo code -10%: SALAD2024</p>
+                <p>
+                  <FaMoneyBill1Wave /> Promo code -10%: SALAD2024
+                </p>
               </div>
             </div>
           </div>

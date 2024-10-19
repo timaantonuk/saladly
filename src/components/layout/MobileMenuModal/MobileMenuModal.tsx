@@ -36,7 +36,15 @@ function MobileMenuModal({
             onClick={handleMobileModalOpen}
           >
             <span className="mobile-menu-modal__span">My Account</span>
-            <IoPersonCircleSharp style={{ width: '30px', height: '30px' }} />
+            {userState.avatar ? (
+              <img
+                className="header__avatar"
+                src={userState.avatar}
+                alt="user avatar"
+              />
+            ) : (
+              <IoPersonCircleSharp style={{ width: '30px', height: '30px' }} />
+            )}
           </button>
         </Link>
 

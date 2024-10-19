@@ -100,8 +100,18 @@ function Header() {
           <Link to={userState.email.length > 0 ? '/account' : '/sign-up'}>
             <button className="header__login-button" type="button">
               <span className="header__login-text">Account</span>{' '}
-              <RxDividerVertical />{' '}
-              <IoPersonCircleSharp style={{ width: '30px', height: '30px' }} />
+              <RxDividerVertical />
+              {userState.avatar ? (
+                <img
+                  className="header__avatar"
+                  src={userState.avatar}
+                  alt="user avatar"
+                />
+              ) : (
+                <IoPersonCircleSharp
+                  style={{ width: '30px', height: '30px' }}
+                />
+              )}
             </button>
           </Link>
 

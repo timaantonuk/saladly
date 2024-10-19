@@ -9,7 +9,7 @@ import CatalogMagic from '../ContentLoader/CatalogMagic'; // Импортиру�
 
 function AllSalads() {
   const dispatch = useAppDispatch();
-  const salads = useSelector((state: RootState) => state.salad.filteredSalads);
+  const salads = useSelector((state: RootState) => state.salad.allSalads);
   const [loading, setLoading] = useState(true); // состояние загрузки
   const [currentPage, setCurrentPage] = useState(1); // текущее состояние страницы
   const itemsPerPage = 6; // количество салатов на страницу
@@ -51,7 +51,7 @@ function AllSalads() {
                 <SaladCard key={salad.name} {...salad} />
               ))
             ) : (
-              <p>No salads match your filter.</p>
+              <p className="salads-menu__semi">No salads match your filter.</p>
             )}
           </ul>
           <Pagination

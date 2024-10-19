@@ -32,6 +32,14 @@
     }
   }
 
+  &__semi {
+    @include semi-heading;
+
+    @include mobile {
+      font-size: 1.4rem;
+    }
+  }
+
   &__item {
     display: block;
     width: 300px;
