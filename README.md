@@ -2,7 +2,7 @@
 
 ![Xnip2024-10-20_19-33-16](https://github.com/user-attachments/assets/8142afeb-2893-4af8-b08d-71f8de8fba10)
 
-Saladly is an online store where you can easily create an account, log in and out, or sign in with Google. You can browse and buy salads, with payments handled securely through Stripe. The store includes useful features like pagination, form validation, user authentication, and a smooth checkout process. It also supports filtering, searching, sorting products, and includes a cart for easy management of your purchases. Custom loaders, like a spinner and skeleton screens, ensure a clean and responsive experience while browsing.
+Saladly is an online store where you can easily create an account, log in and out, or sign in with Google. You can browse and purchase salads, with secure payments processed through Stripe. The store includes features like pagination, form validation, user authentication, and a smooth checkout process. To enhance site management, Sanity CMS is integrated, allowing for easy updates of products and content. The platform also supports filtering, searching, sorting, and includes a cart for managing purchases. Custom loaders, such as a spinner and skeleton screens, provide a smooth and responsive browsing experience.
 
 ## Tech Stack
 
