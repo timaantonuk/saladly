@@ -4,7 +4,7 @@
 
 Saladly is an online store where you can easily create an account, log in and out, or sign in with Google. You can browse and purchase salads, with secure payments processed through Stripe. The store includes features like pagination, form validation, user authentication, and a smooth checkout process. To enhance site management, Sanity CMS is integrated, allowing for easy updates of products and content. The platform also supports filtering, searching, sorting, and includes a cart for managing purchases. Custom loaders, such as a spinner and skeleton screens, provide a smooth and responsive browsing experience.
 
-[![Website preview video](https://img.youtube.com/vi/TBbsExfvoZ8/hqdefault.jpg)](https://www.youtube.com/watch?v=TBbsExfvoZ8)
+[--- SALADLY PREVIEW YOUTUBE VIDEO ---](https://www.youtube.com/watch?v=TBbsExfvoZ8)
 
 ## Tech Stack
 
